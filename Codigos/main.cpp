@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "viaturaLogin.h"
+#include "COPOM/resgistro-chamado.h"
 
 int main(){
     int op=10;
@@ -22,5 +23,22 @@ int main(){
             scanf(" %d", &op2);
             RegistrarViatura(op2);
         }
+        else if(op==2){
+            printf("Ainda não disponivel");
+        }
+        else if(op==3){
+            printf("Ainda não disponivel");
+        }
+        else if(op==4){
+            printf("Ainda não disponivel");
+        }
+        else if(op==5){
+            printf("Ainda não disponivel");
+        }
+        else if(op==6){
+            printf("Ainda não disponivel");
+        }
+
+
     }while(op!=0);
 }
