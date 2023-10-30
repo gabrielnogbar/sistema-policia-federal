@@ -61,21 +61,8 @@ void imprimirLista(chamadoPolicial *I, const char *nomeFila)
 
 
 
-void copomRegistroChamado(){
+void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular, chamadoPolicial *&iRegularPrioritaria, chamadoPolicial *&fRegularPrioritaria, chamadoPolicial *&iEspecializada , chamadoPolicial *&fEspecializada){
 
-    // criacao das filas
-
-    /* 
-        Anotacao: talvez deva colocar essa parte na main, 
-        para resetar as filas todas as vezes que entrar na copom
-    */
-
-    chamadoPolicial *iRegular = NULL, *fRegular; // Criacao da fila regular nao prioritaria
-
-    chamadoPolicial *iRegularPrioritaria = NULL, *fRegularPrioritaria = NULL; // Criacao da fila regular prioritaria
-
-    chamadoPolicial *iEspecializada = NULL, *fEspecializada = NULL; // Criacao da fila especializada
-    
     int tipo;
     struct chamadoPolicial *novo = (struct chamadoPolicial *)calloc(1, sizeof(chamadoPolicial));
     printf("          SPM - COPOM\n\n");

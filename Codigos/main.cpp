@@ -5,15 +5,23 @@
 #include "COPOM/resgistro-chamado.h"
 
 int main(){
+    
+    // Criação das filas de chamados:
+    chamadoPolicial *iRegular = NULL, *fRegular = NULL; // Criacao da fila regular nao prioritaria
+
+    chamadoPolicial *iRegularPrioritaria = NULL, *fRegularPrioritaria = NULL; // Criacao da fila regular prioritaria
+
+    chamadoPolicial *iEspecializada = NULL, *fEspecializada = NULL; // Criacao da fila especializada
+    
     int op=10;
     do{
-        printf("1 - Viatura Login\n");
+        printf("\n1 - Viatura Login\n");
         printf("2 - Viatura em uso\n");
         printf("3 - COPOM\n");
         printf("4 - Policial Militar\n");
         printf("5 - Oficial\n");
         printf("6 - Comandante Geral\n");
-        printf("0 - Encerrar Programa");
+        printf("0 - Encerrar Programa\n");
         scanf(" %d", &op);
 
         if (op==1){
@@ -21,13 +29,14 @@ int main(){
             printf("1 - Policia Regular\n");
             printf("2 - Policia Especializada\n");
             scanf(" %d", &op2);
-            RegistrarViatura(op2);
+            //RegistrarViatura(op2);
         }
         else if(op==2){
             printf("Ainda não disponivel");
         }
         else if(op==3){
-            printf("Ainda não disponivel");
+            printf("Resgistrar chamado: ");
+            copomRegistroChamado(iRegular, fRegular, iRegularPrioritaria, fRegularPrioritaria, iEspecializada, fEspecializada);
         }
         else if(op==4){
             printf("Ainda não disponivel");
