@@ -13,6 +13,7 @@ struct Policial{
 struct Viatura{
     int Codigo;
     Policial policiais[4];
+    char Tipo[15];
     Viatura *prox;
 };
 

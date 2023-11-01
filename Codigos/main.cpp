@@ -1,17 +1,36 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "viaturaLogin.h"
+#include "Login/viaturaLogin.h"
 #include "COPOM/resgistro-chamado.h"
 
 int main(){
-    
+
+    Viatura *ptrVI=NULL, *ptrVA=NULL; //Ponteiro para viaturas inicial e atual
+    FILE * arquivoviaturas; //abrindo arquivo viaturas
+    arquivoviaturas= fopen(".\\documentos\\viaturas.txt","r");
+    for(int i=0;i<10;i++){
+        struct Viatura *newViatura = (struct Viatura *)malloc(sizeof(struct Viatura)); //Criando Viatura
+        fscanf(arquivoviaturas, " %d", &newViatura->Codigo);
+        fscanf(arquivoviaturas, " %[^\n]",newViatura->Tipo);
+        newViatura->prox=NULL;
+        if(ptrVA== NULL){
+            ptrVA= newViatura;
+            ptrVI= newViatura;
+        }
+        else{
+            ptrVI->prox = newViatura;
+            ptrVI=newViatura;
+        }
+        
+    }
+    fclose(arquivoviaturas);
     // Criação das filas de chamados:
-    chamadoPolicial *iRegular = NULL, *fRegular = NULL; // Criacao da fila regular nao prioritaria
+    // chamadoPolicial *iRegular = NULL, *fRegular = NULL; // Criacao da fila regular nao prioritaria
 
-    chamadoPolicial *iRegularPrioritaria = NULL, *fRegularPrioritaria = NULL; // Criacao da fila regular prioritaria
+    // chamadoPolicial *iRegularPrioritaria = NULL, *fRegularPrioritaria = NULL; // Criacao da fila regular prioritaria
 
-    chamadoPolicial *iEspecializada = NULL, *fEspecializada = NULL; // Criacao da fila especializada
+    // chamadoPolicial *iEspecializada = NULL, *fEspecializada = NULL; // Criacao da fila especializada
     
     int op=10;
     do{
@@ -35,8 +54,8 @@ int main(){
             printf("Ainda não disponivel");
         }
         else if(op==3){
-            printf("Resgistrar chamado: ");
-            copomRegistroChamado(iRegular, fRegular, iRegularPrioritaria, fRegularPrioritaria, iEspecializada, fEspecializada);
+           // printf("Resgistrar chamado: ");
+            //copomRegistroChamado(iRegular, fRegular, iRegularPrioritaria, fRegularPrioritaria, iEspecializada, fEspecializada);
         }
         else if(op==4){
             printf("Ainda não disponivel");
