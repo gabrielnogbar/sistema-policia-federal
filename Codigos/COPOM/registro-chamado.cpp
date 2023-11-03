@@ -4,12 +4,14 @@
 
 #include "resgistro-chamado.h"
 
-void copiarChamado( chamadoPolicial *destino, chamadoPolicial *origem)
+void copiarChamado( chamadoPolicial* &destino, chamadoPolicial *origem)
 {
     destino->quantViaturas = origem->quantViaturas;
     strcpy(destino->descricao, origem->descricao);
     strcpy(destino->local, origem->local);
     destino->prox = origem->prox;
+    destino->anterior = origem->anterior;
+    
 }
 
 // Funcao para enfilerar os chamados, elas ja recebem os chamados preenchidos
@@ -21,10 +23,44 @@ void enfilerar(chamadoPolicial *nova, chamadoPolicial *&I, chamadoPolicial *&F){
         I = F = celula;
     }
     else{
-        F->prox = celula;
+        F->anterior = celula;
+        celula->prox = F;
         F = celula;
     }
 }
+
+void enfilerarPrioridade(chamadoPolicial* nova, chamadoPolicial* &I, chamadoPolicial* &F, chamadoPolicial* &PrioridadeF){
+
+    chamadoPolicial* celula = (chamadoPolicial *)calloc(1, sizeof(chamadoPolicial));
+    copiarChamado(celula, nova);
+
+    // Caso fila vazia
+    if (I == NULL){
+        I = F = PrioridadeF = celula;
+    }    
+
+    // Caso a fila ainda nao tiver chamados prioritarios
+    else if(PrioridadeF == NULL){
+        PrioridadeF = celula;
+        PrioridadeF->anterior = I;
+        I->prox = PrioridadeF;
+        I = PrioridadeF;
+    }
+
+    // Caso há fila e ela já tem chamados prioritarios
+    else{
+        celula->anterior = PrioridadeF->anterior;
+        celula->prox = PrioridadeF;
+        PrioridadeF->anterior = celula;
+        PrioridadeF = celula;
+    }
+
+    while(F->anterior != NULL){ // Garantir que F aponte pro final da fila
+        F = F->anterior;
+    }
+    
+}
+
 
 // Funcao para desenfilenar os chamados, retorna um ponteiro de chamado
 chamadoPolicial *desenfilerar(chamadoPolicial *&I, chamadoPolicial *&F){
@@ -36,7 +72,7 @@ chamadoPolicial *desenfilerar(chamadoPolicial *&I, chamadoPolicial *&F){
     }
     else{
         aux = I;
-        I = aux->prox;
+        I = aux->anterior;
 
         if ( I == NULL){
             F = NULL;
@@ -55,13 +91,13 @@ void imprimirLista(chamadoPolicial *I, const char *nomeFila)
         printf("\nQuantidade de Viaturas: %d\n", I->quantViaturas);
         printf("Descrição: %s\n", I->descricao);
         printf("Local: %s\n\n", I->local);
-        I = I->prox;
+        I = I->anterior;
     }
 }
 
 
 
-void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular, chamadoPolicial *&iRegularPrioritaria, chamadoPolicial *&fRegularPrioritaria, chamadoPolicial *&iEspecializada , chamadoPolicial *&fEspecializada){
+void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular, chamadoPolicial* &prioritario,chamadoPolicial *&iEspecializada , chamadoPolicial *&fEspecializada){
 
     int tipo;
     struct chamadoPolicial *novo = (struct chamadoPolicial *)calloc(1, sizeof(chamadoPolicial));
@@ -90,7 +126,7 @@ void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular
         scanf("%d", &opcao); // reuso da variavel tipo
 
         if (opcao == 1){
-            enfilerar(novo, iRegularPrioritaria, fRegularPrioritaria);
+            enfilerarPrioridade(novo, iRegular, fRegular, prioritario);
             printf("Chamado registrado!\n");
         }
 
@@ -107,16 +143,17 @@ void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular
         printf("Chamado registrado\n!");
     }
     
-    printf("\nfila regular:\n");
+    
+    printf("\n----------------------------------------+\n");
+ 
+    printf("\n FILA REGULAR:\n");
     imprimirLista(iRegular, "fila regular");
 
-    printf("\nfila regular prioritaria:\n");
-    imprimirLista(iRegularPrioritaria, "fila regular prioritaria");
 
-    printf("\nfila especializada:\n");
+    printf("\nFILA ESPECIALIZADA:\n");
     imprimirLista(iEspecializada, "fila especializada");
     printf("apagar essas impressoes após os testes ^\n");
-
+   printf("\n----------------------------------------+\n");
 
     free(novo);
 }   

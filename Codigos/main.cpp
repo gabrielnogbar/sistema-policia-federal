@@ -26,11 +26,17 @@ int main(){
     }
     fclose(arquivoviaturas);
     // Criação das filas de chamados:
-    // chamadoPolicial *iRegular = NULL, *fRegular = NULL; // Criacao da fila regular nao prioritaria
+    /*
+        O ponteiro "I" representara o primeiro chamado a ser atendido;
+        O ponteiro "F" representara o ultimo chamado da fila;
+        O ponteiro "Prioridade" representa o ultimo chamado prioritario;
+    */
+    chamadoPolicial *iRegular = NULL, *fRegular = NULL; // Criacao da fila regular nao prioritaria
 
-    // chamadoPolicial *iRegularPrioritaria = NULL, *fRegularPrioritaria = NULL; // Criacao da fila regular prioritaria
+    chamadoPolicial *iEspecializada = NULL, *fEspecializada = NULL; // Criacao da fila especializada
 
-    // chamadoPolicial *iEspecializada = NULL, *fEspecializada = NULL; // Criacao da fila especializada
+    chamadoPolicial *prioridade = NULL; // Ponteito que aponta para o final da fila de prioridade
+
     
     int op=10;
     do{
@@ -41,7 +47,7 @@ int main(){
         printf("5 - Oficial\n");
         printf("6 - Comandante Geral\n");
         printf("0 - Encerrar Programa\n");
-        scanf(" %d", &op);
+        scanf("%d", &op);
 
         if (op==1){
             int op2=0;
@@ -54,8 +60,8 @@ int main(){
             printf("Ainda não disponivel");
         }
         else if(op==3){
-           // printf("Resgistrar chamado: ");
-            //copomRegistroChamado(iRegular, fRegular, iRegularPrioritaria, fRegularPrioritaria, iEspecializada, fEspecializada);
+            printf("Resgistrar chamado: \n");
+            copomRegistroChamado(iRegular, fRegular, prioridade, iEspecializada, fEspecializada);
         }
         else if(op==4){
             printf("Ainda não disponivel");
@@ -69,4 +75,6 @@ int main(){
 
 
     }while(op!=0);
+
+    return 0;
 }
