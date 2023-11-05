@@ -64,7 +64,6 @@ int main(){
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->idade);
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->numeropassagens);
         for (int i=0;i<novapessoa->numeropassagens;i++){
-            char ocorrencia[19];
             fscanf(arquivopessoas," %[^\n]",novapessoa->passagens[i]);
         }
         fscanf(arquivopessoas, " %d",novapessoa->numeroinadimplencias);
@@ -81,17 +80,11 @@ int main(){
         }
     }
     // Criação das filas de chamados:
-    /*
-        O ponteiro "I" representara o primeiro chamado a ser atendido;
-        O ponteiro "F" representara o ultimo chamado da fila;
-        O ponteiro "Prioridade" representa o ultimo chamado prioritario;
-    */
     chamadoPolicial *iRegular = NULL, *fRegular = NULL; // Criacao da fila regular nao prioritaria
 
+    chamadoPolicial *iRegularPrioritaria = NULL, *fRegularPrioritaria = NULL; // Criacao da fila regular prioritaria
+
     chamadoPolicial *iEspecializada = NULL, *fEspecializada = NULL; // Criacao da fila especializada
-
-    chamadoPolicial *prioridade = NULL; // Ponteito que aponta para o final da fila de prioridade
-
     
     int op=10;
     do{
@@ -102,25 +95,21 @@ int main(){
         printf("5 - Oficial\n");
         printf("6 - Comandante Geral\n");
         printf("0 - Encerrar Programa\n");
-        scanf("%d", &op);
+        scanf(" %d", &op);
 
         if (op==1){
             int op2=0;
             printf("1 - Policia Regular\n");
             printf("2 - Policia Especializada\n");
             scanf(" %d", &op2);
-            Policial *ptrReservaP;
-            Viatura  *ptrReservaV;
-            ptrReservaP= ptrPoI;
-            ptrReservaV= ptrVI;
-            LoginViaturas(op2, ptrReservaP, ptrReservaV,iRegular,iEspecializada);
+            LoginViaturas(op2, ptrPoI, ptrVI,iRegular,iRegularPrioritaria);
         }
         else if(op==2){
             printf("Ainda não disponivel");
         }
         else if(op==3){
-            printf("Resgistrar chamado: \n");
-            copomRegistroChamado(iRegular, fRegular, prioridade, iEspecializada, fEspecializada);
+           // printf("Resgistrar chamado: ");
+            //copomRegistroChamado(iRegular, fRegular, iRegularPrioritaria, fRegularPrioritaria, iEspecializada, fEspecializada);
         }
         else if(op==4){
             printf("Ainda não disponivel");
@@ -134,6 +123,4 @@ int main(){
 
 
     }while(op!=0);
-
-    return 0;
 }

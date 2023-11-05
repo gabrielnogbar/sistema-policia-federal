@@ -2,9 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "viaturaLogin.h"
-
-void LoginViatura(int op2, Policial *ptr, Viatura *ptrV){ // Aqui terei que passar o ponteiro inicial da lista de policiais, de viaturas.
+#include "../COPOM/resgistro-chamado.h"/
+int ViaturasDisponiveis=0;
+void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *ptrR, chamadoPolicial *ptrE ){ // Aqui terei que passar o ponteiro inicial da lista de policiais, de viaturas.
     int codigoViatura,quantidadePM;
+    int op;
     
     printf("Código da Viatura:\n");
     scanf(" %d", &codigoViatura);
@@ -17,7 +19,13 @@ void LoginViatura(int op2, Policial *ptr, Viatura *ptrV){ // Aqui terei que pass
         IdentificaPMs(quantidadePM, ptr, ptrV);// Aqui passar o ponteiro inicial dos policiais e o ponteiro da viatura usada.
         printf("1- Apto para atender ocorrência\n");
         printf("2- Cancelar Embarcação\n");
-        
+        scanf(" %d", &op);
+        if (op==1){
+            ptrV->Disponivel=1;
+            ViaturasDispoveis ++;
+
+        }
+
     }
     else{
         printf("Quantidade de Policias errada\n");

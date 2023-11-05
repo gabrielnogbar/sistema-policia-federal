@@ -1,6 +1,6 @@
+#ifndef ViATURA_LOGIN
 #define MAX 100
-
-
+#define ViATURA_LOGIN
 struct Policial{
     char nome[MAX+1];
     int CPF;
@@ -15,22 +15,21 @@ struct Pessoa
 {  char nome[50],cidade[20];
    int CPF, idade;
    int numeropassagens;
-   Texto passagens[3];
+   char **passagens[3];
    int numeroinadimplencias;
-   Texto inadimpencias[3];
+   char **inadimpencias[3];
    Pessoa *prox;
 };
 
-struct Texto
-{
-    char ocorrencia[30];
-};
 struct Viatura{
     int Codigo;
     char **policiais[4];
     char Tipo[15];
     Viatura *prox;
     int Disponivel; // 0 ocupado 1 desocupado
+    int Logado;// 0 deslogado 1 logado
 };
 
-void LoginViatura(int op2, Policial *ptr, Viatura *ptrV);
+void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV, chamadoPolicial *ptrR, chamadoPolicial *ptrP);
+
+#endif//
