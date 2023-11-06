@@ -1,9 +1,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "./viaturaLogin.h"
+#include "viaturaLogin.h"
 #include "../COPOM/resgistro-chamado.h"
-
 void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *ptrR, chamadoPolicial *ptrE){ // Aqui terei que passar o ponteiro inicial da lista de policiais, de viaturas.
     int codigoViatura,quantidadePM;
     int op;
