@@ -1,8 +1,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "Login/viaturaLogin.h"
-#include "COPOM/resgistro-chamado.h"
+#include "./Login/viaturaLogin.h"
+#include "./COPOM/resgistro-chamado.h"
 
 int main(){
 
@@ -59,17 +59,17 @@ int main(){
     while(feof(arquivopessoas)==0){
         struct Pessoa *novapessoa= (struct Pessoa *)malloc(sizeof(struct Pessoa));
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->nome);
-        fscanf(arquivopessoas,"  %d",novapessoa->CPF);
+        fscanf(arquivopessoas,"  %d",&novapessoa->CPF);
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->cidade);
-        fscanf(arquivopessoas,"  %[^\n]",novapessoa->idade);
-        fscanf(arquivopessoas,"  %[^\n]",novapessoa->numeropassagens);
+        fscanf(arquivopessoas,"  %d",&novapessoa->idade);
+        fscanf(arquivopessoas,"  %d",&novapessoa->numeropassagens);
         for (int i=0;i<novapessoa->numeropassagens;i++){
-            char ocorrencia[19];
             fscanf(arquivopessoas," %[^\n]",novapessoa->passagens[i]);
         }
-        fscanf(arquivopessoas, " %d",novapessoa->numeroinadimplencias);
+        fscanf(arquivopessoas, " %d",&novapessoa->numeroinadimplencias);
         for( int i=0; i<novapessoa->numeroinadimplencias;i++){
             fscanf(arquivopessoas," %[^\n]",novapessoa->inadimpencias[i]);
+            printf(novapessoa->inadimpencias[i]);
         }
         if(ptrPeI==NULL){
             ptrPeA= novapessoa;
