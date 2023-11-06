@@ -1,6 +1,7 @@
 #ifndef ViATURA_LOGIN
-#define MAX 100
 #define ViATURA_LOGIN
+    #include "../COPOM/resgistro-chamado.h"
+    #define MAX 100
     struct Policial{
         char nome[MAX+1];
         int CPF;

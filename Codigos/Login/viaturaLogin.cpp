@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "viaturaLogin.h"
-#include "../COPOM/resgistro-chamado.h"/
+#include "../COPOM/resgistro-chamado.h"
 int ViaturasDisponiveis=0;
 void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *ptrR, chamadoPolicial *ptrE ){ // Aqui terei que passar o ponteiro inicial da lista de policiais, de viaturas.
     int codigoViatura,quantidadePM;
@@ -22,7 +22,7 @@ void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *ptrR, 
         scanf(" %d", &op);
         if (op==1){
             ptrV->Disponivel=1;
-            ViaturasDispoveis ++;
+            ViaturasDispoveis++;
 
         }
 
