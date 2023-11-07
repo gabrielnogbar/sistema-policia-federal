@@ -5,7 +5,7 @@
 #include "./COPOM/resgistro-chamado.h"
 
 int main(){
-
+    int Logadas=0;
     Viatura *ptrVI=NULL, *ptrVA=NULL; //Ponteiro para viaturas inicial e atual
     FILE * arquivoviaturas; //abrindo arquivo viaturas
     arquivoviaturas= fopen("../documentos/viaturas.txt","r");
@@ -17,7 +17,12 @@ int main(){
         strcpy(newViatura->Tipo, tipo);
         printf(" %d %s", newViatura->Codigo, newViatura->Tipo);
         newViatura->prox=NULL;
-        newViatura->Disponivel=1;
+        if(newViatura->Tipo=="regular"){
+            newViatura->tipo=0;
+        }
+        else{
+            newViatura->tipo=1;
+        }
         if(ptrVA== NULL){
             ptrVA= newViatura;
             ptrVI= newViatura;
@@ -47,8 +52,8 @@ int main(){
             ptrPoI= policia;
         }
         else{
-            ptrPoI->prox= policia;
-            ptrPoI= policia;
+            ptrPoA->prox= policia;
+            ptrPoA= policia;
         }
     }
     fclose(arquivopolicia);
@@ -56,30 +61,31 @@ int main(){
     Pessoa *ptrPeI=NULL, *ptrPeA=NULL;
     FILE * arquivopessoas;
     arquivopessoas= fopen("../documentos/pessoas.txt","r");
-    while(feof(arquivopessoas)==0){
+    while(!feof(arquivopessoas)){
         struct Pessoa *novapessoa= (struct Pessoa *)malloc(sizeof(struct Pessoa));
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->nome);
-        fscanf(arquivopessoas,"  %d",&novapessoa->CPF);
+        fscanf(arquivopessoas,"  %s",&novapessoa->CPF);
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->cidade);
         fscanf(arquivopessoas,"  %d",&novapessoa->idade);
         fscanf(arquivopessoas,"  %d",&novapessoa->numeropassagens);
         for (int i=0;i<novapessoa->numeropassagens;i++){
             fscanf(arquivopessoas," %[^\n]",novapessoa->passagens[i]);
+            printf("%s \n ", novapessoa->passagens[i]);
         }
         fscanf(arquivopessoas, " %d",&novapessoa->numeroinadimplencias);
         for( int i=0; i<novapessoa->numeroinadimplencias;i++){
             fscanf(arquivopessoas," %[^\n]",novapessoa->inadimpencias[i]);
-            printf(novapessoa->inadimpencias[i]);
         }
         if(ptrPeI==NULL){
             ptrPeA= novapessoa;
             ptrPeI= novapessoa;
         }
         else{
-            ptrPeI->prox=novapessoa;
-            ptrPeI=novapessoa;
+            ptrPeA->prox=novapessoa;
+            ptrPeA=novapessoa;
         }
     }
+    fclose(arquivopessoas);
     // Criação das filas de chamados:
     /*
         O ponteiro "I" representara o primeiro chamado a ser atendido;
@@ -113,7 +119,7 @@ int main(){
             Viatura  *ptrReservaV;
             ptrReservaP= ptrPoI;
             ptrReservaV= ptrVI;
-            LoginViaturas(op2, ptrReservaP, ptrReservaV,iRegular,iEspecializada);
+            LoginViaturas(op2, ptrReservaP, ptrReservaV,iRegular,iEspecializada,Logadas);
         }
         else if(op==2){
             printf("Ainda não disponivel");
