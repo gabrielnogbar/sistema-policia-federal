@@ -40,4 +40,7 @@ void IdentificaPMs(int quantidadePM, Policial *ptr, Viatura *ptrV){//
         ptrV->policiais[i]= &nome;
     }
 
+
 }
+
+
