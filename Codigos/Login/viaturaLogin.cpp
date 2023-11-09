@@ -82,11 +82,10 @@ void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR,
 
 void IdentificaPMs(int quantidadePM, Policial *ptr, Viatura *ptrV){  
     printf("\nIdentificação dos PM");
-
+    printf(" \n Nome de Guerra dos policiais:");
     for(int i=1; i<=quantidadePM;i++){
         char nome[30];
-        printf(" \n Nome do policial %d :", i);
-        scanf(" %[^\n]",nome);
+        scanf(" %s",nome);
         strcpy(ptrV->policiais[i], nome);
     }
     printf("\n");
