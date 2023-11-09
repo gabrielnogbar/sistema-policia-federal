@@ -14,24 +14,33 @@
     };
     struct Pessoa
     {  char nome[50],cidade[20];
-       int CPF, idade;
+       char CPF[11]; 
+       int idade;
        int numeropassagens;
-       char *passagens[3];
+       char passagens[3][30];
        int numeroinadimplencias;
-       char *inadimpencias[3];
+       char inadimpencias[3][30];
        Pessoa *prox;
     };
     
     struct Viatura{
         int Codigo;
-        char **policiais[4];
+        char policiais[4][30];
         char Tipo[15];
         Viatura *prox;
-        int Disponivel; // 0 ocupado 1 desocupado
+        int tipo; // 0 Regular 1 Especializada
         int Logado;// 0 deslogado 1 logado
+        int qtdChamado;
     };
     
-    void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV, chamadoPolicial *ptrR, chamadoPolicial *ptrP);
+    void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV, chamadoPolicial *ptrR, chamadoPolicial *ptrP, int Disponiveis);
 
     void IdentificaPMs(int quantidadePM, Policial *ptr, Viatura *ptrV);
+
+    void PesquisarCPF(Pessoa *ptrP);
+
+    void FunçõesChamada(Pessoa *ptrP);
+
+    void Caso(Viatura *ptrV,Pessoa *ptrP,chamadoPolicial *&ptrC);
+    
 #endif //
