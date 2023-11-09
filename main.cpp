@@ -5,7 +5,7 @@
 #include "COPOM/resgistro-chamado.h"
 
 int main(){
-
+    int DisponiveisR=0,DisponiveisE=0;
     Viatura *ptrVI=NULL, *ptrVA=NULL; //Ponteiro para viaturas inicial e atual
     FILE * arquivoviaturas; //abrindo arquivo viaturas
     arquivoviaturas= fopen("../documentos/viaturas.txt","r");
@@ -36,6 +36,7 @@ int main(){
         struct Policial *policia = (struct Policial *)malloc(sizeof(struct Policial));
         fscanf(arquivopolicia," %[^\n]",policia->nome);
         fscanf(arquivopolicia," %d",&policia->CPF);
+        printf(" %d", policia->CPF)
         fscanf(arquivopolicia," %[^\n]",policia->nomeGuerra);
         fscanf(arquivopolicia," %[^\n]",policia->cidade);
         fscanf(arquivopolicia," %d", &policia->idade);
@@ -102,10 +103,18 @@ int main(){
             printf("1 - Policia Regular\n");
             printf("2 - Policia Especializada\n");
             scanf(" %d", &op2);
-            LoginViaturas(op2, ptrPoI, ptrVI,iRegular,iRegularPrioritaria);
+            LoginViaturas(op2, ptrPoI, ptrVI,iRegular,iRegularPrioritaria,DisponiveisR,DisponiveisE,ptrPeI);
         }
         else if(op==2){
-            printf("Ainda não disponivel");
+            int codigoViatura;
+            printf("Identificador da Viatura: ");
+            scanf("%d", &codigoViatura);
+            for(Viatura *p=ptrVI;p!=NULL;p=p->prox){
+                if(p->Codigo== codigoViatura){
+
+                }
+
+            }
         }
         else if(op==3){
            // printf("Resgistrar chamado: ");

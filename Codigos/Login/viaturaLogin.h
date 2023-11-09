@@ -1,6 +1,6 @@
 #ifndef ViATURA_LOGIN
 #define ViATURA_LOGIN
-    #include "../COPOM/resgistro-chamado.h"
+#include "../COPOM/resgistro-chamado.h"
     #define MAX 100
     struct Policial{
         char nome[MAX+1];
@@ -33,7 +33,7 @@
         int qtdChamado;
     };
     
-    void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV, chamadoPolicial *ptrR, chamadoPolicial *ptrP, int Disponiveis);
+    void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV, chamadoPolicial *ptrR, chamadoPolicial *ptrE, int &DisponiveisR,int &DisponiveisE,Pessoa *ptrP);
 
     void IdentificaPMs(int quantidadePM, Policial *ptr, Viatura *ptrV);
 

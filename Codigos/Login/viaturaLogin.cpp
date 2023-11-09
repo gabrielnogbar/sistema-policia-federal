@@ -104,9 +104,6 @@ void Caso(Viatura *ptrV,Pessoa *ptrP,chamadoPolicial *&ptrC){
 
 }
 
-<<<<<<< HEAD
-
-=======
 void FunçõesChamada(Pessoa *ptrP){
     int op=0;
     do{
@@ -137,4 +134,3 @@ void PesquisarCPF(Pessoa *ptrP){
             printf("\n Numero de Inandimplencias: %d \n",p->numeroinadimplencias);
         }
 }}
->>>>>>> ea9c692e39d3c769bc339f7b66b016eb8d2a217e
