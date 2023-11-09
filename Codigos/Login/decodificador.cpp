@@ -57,12 +57,10 @@ char* decodificadorSenha(char* senha){
 
 int main(){
     char senha[30];
-    scanf("%s", senha);
+    scanf(" %s", senha);
 
     char* senhaDecodificada = decodificadorSenha(senha);
-    printf(senhaDecodificada);
-
-
+    printf("%s",senhaDecodificada);
 
     free(senhaDecodificada);
     return 0;
@@ -82,8 +80,8 @@ bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI){
 
     while(ptrPoI != NULL){
 
-        if (strcmp(ptrPoI->nomeGuerra, usuario)){
-            if (strcmp(ptrPoI->senha, senhaDecodificada)){
+        if (strcmp(ptrPoI->nomeGuerra, usuario)==0){
+            if (strcmp(ptrPoI->senha, senhaDecodificada)==0){
                 return true;
             }
             else{
