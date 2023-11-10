@@ -16,7 +16,7 @@ char* decodificadorSenha(char* senha){
         if (65 <= senha[i] && senha[i] <= 90){
 
             if (senha[i] + 3 > 90){
-                auxiliar[i] = senha[i] + 3 - 26;
+                auxiliar[i] = (senha[i] + 3)- 26;
             }
             else{
                 auxiliar[i] = senha[i] + 3;
@@ -42,15 +42,13 @@ char* decodificadorSenha(char* senha){
         
         
     }    
-    while (auxiliar[iFinal+1] != '\0'){
+    while (auxiliar[iFinal] != '\0'){
             iFinal++;
     }
 
     for (int i = 0; i <iFinal; i++) { 
         senhaDescrip[iFinal-1 - i] = auxiliar[i];
     }
-
-    senhaDescrip[iFinal + 1] = '\0';
     //strcpy(senha, senhaDescrip);
     return senhaDescrip;
 }
@@ -60,7 +58,7 @@ int main(){
     scanf(" %s", senha);
 
     char* senhaDecodificada = decodificadorSenha(senha);
-    printf("%s",senhaDecodificada);
+    printf("%s\n",senhaDecodificada);
 
     free(senhaDecodificada);
     return 0;

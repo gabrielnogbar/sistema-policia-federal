@@ -158,7 +158,7 @@ chamadoPolicial *&fEspecializada){
 
 
 
-void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial ){
+/* void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial ){
 
     /*
         Prototipo
@@ -167,7 +167,7 @@ void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegu
 
         NOTA: Esta funcao ainda nao se preocupa com o numero de viaturas
               necessarias para o chamado. 
-    */
+    
    
    // ponteiro para percorrer as listas
    Viatura* viatura = listaViaturas;
@@ -215,6 +215,6 @@ void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegu
         }
         
     }
-}
+} */
 
 
