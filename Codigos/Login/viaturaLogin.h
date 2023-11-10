@@ -27,10 +27,12 @@
         int Codigo;
         char policiais[4][30];
         char Tipo[15];
-        Viatura *prox;
+        int disponivel: // 0 Disponivel 1 indisponivel(com chamado atribuido ou prisão em andamento)
         int tipo; // 0 Regular 1 Especializada
         int Logado;// 0 deslogado 1 logado
         int qtdChamado;
+        chamadoPolicial *chamadoAtual;
+        Viatura *prox;
     };
     
     void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV, chamadoPolicial *ptrR, chamadoPolicial *ptrE, int &DisponiveisR,int &DisponiveisE,Pessoa *ptrP);
