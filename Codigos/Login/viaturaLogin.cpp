@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include "viaturaLogin.h"
 #include "../COPOM/registro-chamado.h"
-void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP){ // Aqui terei que passar o ponteiro inicial da lista de policiais, de viaturas.
+void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP)
+{ // Aqui terei que passar o ponteiro inicial da lista de policiais, de viaturas.
     int codigoViatura,quantidadePM;
     int op;
     Viatura *prtVI= ptrV; //Criando um ponteiro reserva pra percorrer em caso de chamado
