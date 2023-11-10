@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "./Login/viaturaLogin.h"
-#include "./COPOM/resgistro-chamado.h"
+#include "./COPOM/registro-chamado.h"
 
 int main(){
     int Logadas=0;

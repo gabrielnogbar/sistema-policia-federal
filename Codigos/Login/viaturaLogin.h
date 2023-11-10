@@ -1,6 +1,6 @@
 #ifndef ViATURA_LOGIN
 #define ViATURA_LOGIN
-#include "../COPOM/resgistro-chamado.h"
+#include "../COPOM/registro-chamado.h"
     #define MAX 100
     struct Policial{
         char nome[MAX+1];
@@ -27,7 +27,7 @@
         int Codigo;
         char policiais[4][30];
         char Tipo[15];
-        int disponivel: // 0 Disponivel 1 indisponivel(com chamado atribuido ou prisão em andamento)
+        int disponivel; // 0 Disponivel 1 indisponivel(com chamado atribuido ou prisão em andamento)
         int tipo; // 0 Regular 1 Especializada
         int Logado;// 0 deslogado 1 logado
         int qtdChamado;
@@ -41,8 +41,14 @@
 
     void PesquisarCPF(Pessoa *ptrP);
 
-    void FunçõesChamada(Pessoa *ptrP);
+    void funcoesChamada(Pessoa *ptrP);
 
     void Caso(Viatura *ptrV,Pessoa *ptrP,chamadoPolicial *&ptrC);
     
+    char* decodificadorSenha(char* senha);
+
+    bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI);
+
+
+
 #endif //
