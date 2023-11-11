@@ -1,11 +1,11 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "./Login/viaturaLogin.h"
-#include "./COPOM/resgistro-chamado.h"
+//#include "./Login/viaturaLogin.h"
+#include "./COPOM/registro-chamado.h"
 
 int main(){
-    int Logadas=0;
+    int LogadasR=0, LogadasE=0;
     Viatura *ptrVI=NULL, *ptrVA=NULL; //Ponteiro para viaturas inicial e atual
     FILE * arquivoviaturas; //abrindo arquivo viaturas
     arquivoviaturas= fopen("../documentos/viaturas.txt","r");
@@ -64,7 +64,7 @@ int main(){
     while(!feof(arquivopessoas)){
         struct Pessoa *novapessoa= (struct Pessoa *)malloc(sizeof(struct Pessoa));
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->nome);
-        fscanf(arquivopessoas,"  %s",&novapessoa->CPF);
+        fscanf(arquivopessoas,"  %s",novapessoa->CPF);
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->cidade);
         fscanf(arquivopessoas,"  %d",&novapessoa->idade);
         fscanf(arquivopessoas,"  %d",&novapessoa->numeropassagens);
@@ -119,7 +119,7 @@ int main(){
             Viatura  *ptrReservaV;
             ptrReservaP= ptrPoI;
             ptrReservaV= ptrVI;
-            LoginViaturas(op2, ptrReservaP, ptrReservaV,iRegular,iEspecializada,Logadas);
+            LoginViaturas(op2, ptrReservaP, ptrReservaV,iRegular,iEspecializada,LogadasR,LogadasE, ptrPeI);
         }
         else if(op==2){
             printf("Ainda não disponivel");

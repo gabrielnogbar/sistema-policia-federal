@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "viaturaLogin.h"
-#include "../COPOM/resgistro-chamado.h"
-void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP){ // Aqui terei que passar o ponteiro inicial da lista de policiais, de viaturas.
+#include "../COPOM/registro-chamado.h"
+void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP)
+{ // Aqui terei que passar o ponteiro inicial da lista de policiais, de viaturas.
     int codigoViatura,quantidadePM;
     int op=0;
     Viatura *prtVI= ptrV; //Criando um ponteiro reserva pra percorrer em caso de chamado
@@ -98,13 +99,13 @@ void Caso(Viatura *ptrV,Pessoa *ptrP,chamadoPolicial *&ptrC){
     int op;
     scanf(" %d",&op);
     if(op=1){
-        FunçõesChamada(ptrP);
+        funcoesChamada(ptrP);
     }
 
 
 }
 
-void FunçõesChamada(Pessoa *ptrP){
+void funcoesChamada(Pessoa *ptrP){
     int op=0;
     do{
     printf("1 - Pesquisar por CPF\n");

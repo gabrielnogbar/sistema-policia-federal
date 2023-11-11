@@ -2,7 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "resgistro-chamado.h"
+#include "registro-chamado.h"
+#include "../Login/viaturaLogin.h"
 
 void copiarChamado( chamadoPolicial* &destino, chamadoPolicial *origem)
 {
@@ -63,7 +64,7 @@ void enfilerarPrioridade(chamadoPolicial* nova, chamadoPolicial* &I, chamadoPoli
 
 
 // Funcao para desenfilenar os chamados, retorna um ponteiro de chamado
-chamadoPolicial *desenfilerar(chamadoPolicial *&I, chamadoPolicial *&F){
+chamadoPolicial *desenfilerar(chamadoPolicial *&I){
     
     struct chamadoPolicial *aux;
 
@@ -73,10 +74,6 @@ chamadoPolicial *desenfilerar(chamadoPolicial *&I, chamadoPolicial *&F){
     else{
         aux = I;
         I = aux->anterior;
-
-        if ( I == NULL){
-            F = NULL;
-        }
 
         return aux;
     }
@@ -97,7 +94,8 @@ void imprimirLista(chamadoPolicial *I, const char *nomeFila)
 
 
 
-void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular, chamadoPolicial* &prioritario,chamadoPolicial *&iEspecializada , chamadoPolicial *&fEspecializada){
+void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular, chamadoPolicial* &prioritario,chamadoPolicial *&iEspecializada , 
+chamadoPolicial *&fEspecializada){
 
     int tipo;
     struct chamadoPolicial *novo = (struct chamadoPolicial *)calloc(1, sizeof(chamadoPolicial));
@@ -157,5 +155,66 @@ void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular
 
     free(novo);
 }   
+
+
+
+/* void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial ){
+
+    /*
+        Prototipo
+
+        -percorre pelas viaturas bucando um chamado para ela;
+
+        NOTA: Esta funcao ainda nao se preocupa com o numero de viaturas
+              necessarias para o chamado. 
+    
+   
+   // ponteiro para percorrer as listas
+   Viatura* viatura = listaViaturas;
+
+    printf("\n**** RADIO ****\n\n");
+    // Verificar se as filas de chamados estao vazios
+    if(chamadosRegular == NULL && chamadosEspecial == NULL){
+        
+        // TODO: Revisar se deixa ou tira esse print
+        printf("\n--- Não há nenhum chamado ---\n***************\n");
+        
+    }
+    else{
+        // Verificadores: para definir se a fila esta vazia ou nao;
+        bool regular = true;
+        bool especial = true;
+
+        if (chamadosRegular == NULL){
+            regular = false;
+        }
+        if (chamadosEspecial == NULL){
+            especial = false;
+        }
+
+        // percorrer viaturas
+
+        while (viatura != NULL){
+
+            if (viatura->disponivel == 0){
+
+                if (viatura->tipo == 0 && regular){ // se for tipo regular e haver chamados regular
+                    viatura->chamadoAtual = desenfilerar(chamadosRegular);
+                    viatura->disponivel = 1;
+
+                    printf("Viatura %d regular recebeu um chamado %s\n", viatura->Codigo, viatura->chamadoAtual->descricao);
+                }
+                else if (viatura->tipo ==  1 && especial){ // se for tipo especial e haver chamados especias
+                    viatura->chamadoAtual = desenfilerar(chamadosEspecial);
+                    viatura->disponivel = 1;
+                    printf("Viatura %d especializada recebeu um chamado: %s\n", viatura->Codigo, viatura->chamadoAtual->descricao);
+                } 
+            }
+
+            viatura = viatura->prox;
+        }
+        
+    }
+} */
 
 
