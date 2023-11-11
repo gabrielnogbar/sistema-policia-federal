@@ -13,7 +13,7 @@
     
 
 
-    void copiarChamado( chamadoPolicial* &destino, chamadoPolicial *origem);
+    void copiarChamado( chamadoPolicial *&destino, chamadoPolicial *origem);
 
     // Funcao para enfilerar os chamados, elas ja recebem os chamados preenchidos
     void enfilerar(chamadoPolicial *nova, chamadoPolicial *&I, chamadoPolicial *&F);
