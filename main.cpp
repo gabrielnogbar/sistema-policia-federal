@@ -36,7 +36,7 @@ int main(){
         struct Policial *policia = (struct Policial *)malloc(sizeof(struct Policial));
         fscanf(arquivopolicia," %[^\n]",policia->nome);
         fscanf(arquivopolicia," %d",&policia->CPF);
-        printf(" %d", policia->CPF)
+        printf(" %d", policia->CPF);
         fscanf(arquivopolicia," %[^\n]",policia->nomeGuerra);
         fscanf(arquivopolicia," %[^\n]",policia->cidade);
         fscanf(arquivopolicia," %d", &policia->idade);
@@ -60,7 +60,7 @@ int main(){
     while(feof(arquivopessoas)==0){
         struct Pessoa *novapessoa= (struct Pessoa *)malloc(sizeof(struct Pessoa));
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->nome);
-        fscanf(arquivopessoas,"  %d",novapessoa->CPF);
+        fscanf(arquivopessoas,"  %d", &novapessoa->CPF);
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->cidade);
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->idade);
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->numeropassagens);
@@ -110,10 +110,15 @@ int main(){
             printf("Identificador da Viatura: ");
             scanf("%d", &codigoViatura);
             for(Viatura *p=ptrVI;p!=NULL;p=p->prox){
-                if(p->Codigo== codigoViatura){
+                if(p->Codigo== codigoViatura && p->Logado==1){
+                    if (p->chamadoAtual!=NULL){
+                        
+                    }
 
                 }
-
+                elif(p->prox=NULL){
+                    printf("Errado o codigo ou Viatura ainda não efetuo Login");
+                }
             }
         }
         else if(op==3){
