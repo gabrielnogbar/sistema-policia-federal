@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #include "registro-chamado.h"
-#include "../Login/viaturaLogin.h"
+
 
 void copiarChamado( chamadoPolicial* &destino, chamadoPolicial *origem)
 {
@@ -157,8 +157,7 @@ chamadoPolicial *&fEspecializada){
 }   
 
 
-
-/* void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial ){
+void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial ){
 
     /*
         Prototipo
@@ -167,7 +166,7 @@ chamadoPolicial *&fEspecializada){
 
         NOTA: Esta funcao ainda nao se preocupa com o numero de viaturas
               necessarias para o chamado. 
-    
+    */
    
    // ponteiro para percorrer as listas
    Viatura* viatura = listaViaturas;
@@ -215,6 +214,6 @@ chamadoPolicial *&fEspecializada){
         }
         
     }
-} */
+} 
 
 

@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-//#include "./Login/viaturaLogin.h"
+
 #include "./COPOM/registro-chamado.h"
 
 int main(){
@@ -17,7 +17,7 @@ int main(){
         strcpy(newViatura->Tipo, tipo);
         printf(" %d %s", newViatura->Codigo, newViatura->Tipo);
         newViatura->prox=NULL;
-        if(newViatura->Tipo=="regular"){
+        if(strcmp(newViatura->Tipo, "regular")){
             newViatura->tipo=0;
         }
         else{
