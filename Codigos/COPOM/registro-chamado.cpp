@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #include "registro-chamado.h"
-#include "../Login/viaturaLogin.h"
+
 
 void copiarChamado( chamadoPolicial* &destino, chamadoPolicial *origem)
 {

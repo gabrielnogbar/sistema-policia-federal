@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "viaturaLogin.h"
-
+#include "../COPOM/registro-chamado.h"
 
 
 char* decodificadorSenha(char* senha){
@@ -42,17 +42,18 @@ char* decodificadorSenha(char* senha){
         
         
     }    
-    while (auxiliar[iFinal] != '\0'){
+while (auxiliar[iFinal] != '\0'){
             iFinal++;
-    }
+            }
 
-    for (int i = 0; i <iFinal; i++) { 
+            for (int i = 0; i <iFinal; i++) { 
         senhaDescrip[iFinal-1 - i] = auxiliar[i];
-    }
+}
     //strcpy(senha, senhaDescrip);
     return senhaDescrip;
 }
 
+/*
 int main(){
     char senha[30];
     scanf(" %s", senha);
@@ -63,7 +64,7 @@ int main(){
     free(senhaDecodificada);
     return 0;
 }
-
+*/
 
 /*
     Função de verificação usuário/senha;

@@ -1,6 +1,6 @@
 #ifndef ViATURA_LOGIN
 #define ViATURA_LOGIN
-#include "../COPOM/registro-chamado.h"
+
     #define MAX 100
 
     struct chamadoPolicial
@@ -49,8 +49,9 @@
 
 
     
-    void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV, chamadoPolicial *ptrR, chamadoPolicial *ptrE, int &DisponiveisR,int &DisponiveisE,Pessoa *ptrP);
-    //void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP)
+    //void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV, chamadoPolicial *ptrR, chamadoPolicial *ptrE, int &DisponiveisR,int &DisponiveisE,Pessoa *ptrP);
+    void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP);
+    
     void IdentificaPMs(int quantidadePM, Policial *ptr, Viatura *ptrV);
 
     void PesquisarCPF(Pessoa *ptrP);
@@ -63,6 +64,7 @@
 
     bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI);
 
+    
 
 
 #endif //
