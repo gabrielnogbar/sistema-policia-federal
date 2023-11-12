@@ -158,7 +158,7 @@ chamadoPolicial *&fEspecializada){
 }   
 
 
-void distribuidorChamado(Viatura* listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial ){
+void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial ){
 
     /*
         Prototipo
@@ -196,7 +196,7 @@ void distribuidorChamado(Viatura* listaViaturas, chamadoPolicial* &chamadosRegul
 
         while (viatura != NULL){
 
-            if (viatura->disponivel == 0 && viatura->Logado==1){
+            if (viatura->disponivel == 0 && viatura->Logado==1 && viatura->chamadoAtual == NULL){
 
                 if (viatura->tipo == 0 && regular){ // se for tipo regular e haver chamados regular
                     viatura->chamadoAtual = desenfilerar(chamadosRegular);
@@ -223,6 +223,8 @@ void empilharChamadoResolvido(chamadoPolicial* &chamadoResolvido, chamadoPolicia
     // ->prox: para ir em direcao ao chamado mais recente
     if(chamadoResolvido != NULL){
         if (pilha == NULL){
+            chamadoResolvido->anterior = NULL;
+            chamadoResolvido->prox = NULL;
             pilha = chamadoResolvido;
         }
         else{

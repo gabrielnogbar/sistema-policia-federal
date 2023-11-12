@@ -160,6 +160,11 @@ int main(){
             empilharChamadoResolvido(teste, pilhaChamadosResolvidos);
         }
         
+        else if (op==19)
+        {
+            imprimirLista(pilhaChamadosResolvidos, "Pilha de chamados resolvidos");
+        }
+        
 
 
     }while(op!=0);
