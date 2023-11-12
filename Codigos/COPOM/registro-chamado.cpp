@@ -196,7 +196,7 @@ void distribuidorChamado(Viatura* listaViaturas, chamadoPolicial* &chamadosRegul
 
         while (viatura != NULL){
 
-            if (viatura->disponivel == 0){
+            if (viatura->disponivel == 0 && viatura->Logado==1){
 
                 if (viatura->tipo == 0 && regular){ // se for tipo regular e haver chamados regular
                     viatura->chamadoAtual = desenfilerar(chamadosRegular);

@@ -12,6 +12,7 @@ int main(){
     for(int i=0;i<10;i++){
         char tipo[50];
         struct Viatura *newViatura = (struct Viatura *)malloc(sizeof(struct Viatura)); //Criando Viatura
+        newViatura->chamadoAtual=NULL;
         fscanf(arquivoviaturas," %d", &newViatura->Codigo);
         fscanf(arquivoviaturas," %[^\n]",tipo);
         strcpy(newViatura->Tipo, tipo);
@@ -64,13 +65,14 @@ int main(){
     while(!feof(arquivopessoas)){
         struct Pessoa *novapessoa= (struct Pessoa *)malloc(sizeof(struct Pessoa));
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->nome);
-        fscanf(arquivopessoas,"  %s",novapessoa->CPF);
+        fscanf(arquivopessoas," %11s",novapessoa->CPF);
+        printf("%s\n",novapessoa->CPF);
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->cidade);
         fscanf(arquivopessoas,"  %d",&novapessoa->idade);
         fscanf(arquivopessoas,"  %d",&novapessoa->numeropassagens);
         for (int i=0;i<novapessoa->numeropassagens;i++){
             fscanf(arquivopessoas," %[^\n]",novapessoa->passagens[i]);
-            printf("%s \n ", novapessoa->passagens[i]);
+            //printf("%s \n ", novapessoa->passagens[i]);
         }
         fscanf(arquivopessoas, " %d",&novapessoa->numeroinadimplencias);
         for( int i=0; i<novapessoa->numeroinadimplencias;i++){
@@ -102,6 +104,7 @@ int main(){
    
     int op=10;
     do{
+        distribuidorChamado(ptrVI,iRegular,iEspecializada);
         printf("\n1 - Viatura Login\n");
         printf("2 - Viatura em uso\n");
         printf("3 - COPOM\n");
@@ -123,7 +126,11 @@ int main(){
             LoginViaturas(op2, ptrReservaP, ptrReservaV,iRegular,iEspecializada,LogadasR,LogadasE, ptrPeI);
         }
         else if(op==2){
-            printf("Ainda não disponivel");
+            printf("Informe o codigo da Viatura:\n ");
+            int codigoV;
+            scanf(" %d",&codigoV);
+            VerificaUso(codigoV,ptrVI,ptrPeI);
+
         }
         else if(op==3){
             printf("Resgistrar chamado: \n");

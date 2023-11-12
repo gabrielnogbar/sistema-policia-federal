@@ -28,7 +28,7 @@
     };
     struct Pessoa
     {  char nome[50],cidade[20];
-       char CPF[11]; 
+       char CPF[30]; 
        int idade;
        int numeropassagens;
        char passagens[3][30];
@@ -72,7 +72,7 @@
 
     void VerificaUso(int Codigo, Viatura *ptr,Pessoa *ptrP);
 
-    
+    void TemChamado(Viatura *ptr,Pessoa *ptrP);
 
 
 #endif //

@@ -14,12 +14,15 @@ void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR,
     
     printf("Código da Viatura:\n");
     scanf(" %d", &codigoViatura);
-    while(codigoViatura != ptrV->Codigo || ptrV!=NULL){
+    while(ptrV != NULL && codigoViatura != ptrV->Codigo){
         ptrV=ptrV->prox;
     }
     ptrV->Logado=1;
     if(ptrV->Logado==1){
         ViaturaAtendimento(op2,ptr, ptrV,ptrR,ptrE,DisponiveisR, DisponiveisE,ptrP);
+    }
+    else{
+        printf("Codigo errado");
     }
 }
 void ViaturaAtendimento(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP){
@@ -31,6 +34,7 @@ void ViaturaAtendimento(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&
         IdentificaPMs(quantidadePM, ptr, ptrV);// Aqui passar o ponteiro inicial dos policiais e o ponteiro da viatura usada.
             printf("1- Apto para atender ocorrência\n");
             printf("2- Cancelar Embarcação\n");
+            ptrV->disponivel=0;
             scanf(" %d", &op);
             if(op==1){
                 if ((ptrR!=NULL) && (op2==1)){
@@ -45,6 +49,7 @@ void ViaturaAtendimento(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&
                 else if((op2==1 && ptrR==NULL)){
                     printf(" Sem chamados no momento, VIatura colocada para ronda, Voltando para o menu principal\n");
                     op=2;
+                    ptrV->disponivel=0;
                     DisponiveisR ++;
                 }
                 else if(( op2==2 && ptrE==NULL)){
@@ -119,16 +124,39 @@ void funcoesChamada(Pessoa *ptrP){
 }
 
 void PesquisarCPF(Pessoa *ptrP){
-    char CPF[11];
+    char cpf[15];
     printf("CPF: ");
-    scanf(" %[^\n]", CPF);
+    scanf(" %s", cpf);
     for(Pessoa *p=ptrP; p!=NULL; p=p->prox){
-        if(strcmp(p->CPF, CPF)==0){
+        if(strcmp(p->CPF, cpf)==0){
             printf("\n Nome: %s",p->nome);
             printf("\n Cidade: %s",p->cidade);
             printf("\n Idade: %d",p->idade);
             printf("\n Numero de passagens:  %d",p->numeropassagens);
             printf("\n Numero de Inandimplencias: %d \n",p->numeroinadimplencias);
+            break;
         }
     }  
+}
+void TemChamado(Viatura *ptr,Pessoa *ptrP){
+    if(ptr->chamadoAtual !=NULL){
+        ptr->qtdChamado++;
+        Caso(ptr,ptrP);
+        ptr->disponivel=0;
+    }
+    else{
+        printf("Sem chamado ou pedido de reforço, retornando ao menu \n");
+    }
+}
+
+void VerificaUso(int Codigo, Viatura *ptr,Pessoa *ptrP){
+    for(ptr; ptr != NULL ; ptr = ptr->prox){
+        if(ptr->Codigo==Codigo && ptr->Logado==1){
+            TemChamado(ptr,ptrP);
+            break;
+        }
+    }
+    if(ptr==NULL){
+        printf("Codigo errado ou viatura não logada\n");
+    }
 }
