@@ -2,18 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../Login/viaturaLogin.h"
-#include "viaturaUso.h"
-#include "../COPOM/resgistro-chamado.h"
 
-void ViaturaEmUso(Viatura p){
-    int op=0;
-    printf("Descrição: %s \n",p->chamado);
-    printf("Localização: %s \n", ptrC->local);
-    printf(" 1- Confirmar ação policial       2- Ação Dispensada");
-    scanf(" %d",&op);
-    if(op=1){
-        FunçõesChamada(ptrP);
+void VerificaUso(int Codigo, Viatura *ptr,Pessoa *ptrP){
+    for(ptr;ptr->Codigo!=Codigo || ptr==NULL;ptr=ptr->prox){
+        if(ptr->Codigo==Codigo){
+            TemChamado(ptr,ptrP);
+        }
     }
+}
 
-
+void TemChamado(Viatura *ptr,Pessoa *ptrP){
+    if(ptr->chamadoAtual !=NULL){
+        ptr->qtdChamado++;
+        Caso(ptr,ptrP);
     }
+    else{
+        printf("Sem chamado ou pedido de reforço, retornando ao menu \n");
+    }
+}

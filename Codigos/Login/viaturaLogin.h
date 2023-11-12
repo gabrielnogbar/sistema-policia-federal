@@ -10,6 +10,8 @@
         char local[51];
         struct chamadoPolicial *prox;
         struct chamadoPolicial *anterior;
+        Viatura *viaturaDoChamada; // Ponteiro para a viatura que atendeu ao chamado
+        int resolvido; // 0 não 1 sim
     };
 
     struct Policial{
@@ -52,17 +54,21 @@
     //void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV, chamadoPolicial *ptrR, chamadoPolicial *ptrE, int &DisponiveisR,int &DisponiveisE,Pessoa *ptrP);
     void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP);
     
+    void ViaturaAtendimento(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP);
+
     void IdentificaPMs(int quantidadePM, Policial *ptr, Viatura *ptrV);
 
     void PesquisarCPF(Pessoa *ptrP);
 
     void funcoesChamada(Pessoa *ptrP);
 
-    void Caso(Viatura *ptrV,Pessoa *ptrP,chamadoPolicial *&ptrC);
+    void Caso(Viatura *ptrV,Pessoa *ptrP);
     
     char* decodificadorSenha(char* senha);
 
     bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI);
+
+    void VerificaUso(int Codigo, Viatura *ptr,Pessoa *ptrP);
 
     
 

@@ -122,7 +122,11 @@ int main(){
             LoginViaturas(op2, ptrReservaP, ptrReservaV,iRegular,iEspecializada,LogadasR,LogadasE, ptrPeI);
         }
         else if(op==2){
-            printf("Ainda não disponivel");
+            printf("Informe o codigo da Viatura:\n ");
+            int codigoV;
+            scanf(" %d",&codigoV);
+            VerificaUso(codigoV,ptrVI,ptrPeI);
+
         }
         else if(op==3){
             printf("Resgistrar chamado: \n");
