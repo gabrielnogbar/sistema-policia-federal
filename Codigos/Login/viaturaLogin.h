@@ -64,7 +64,7 @@
 
     void funcoesChamada(Pessoa *ptrP);
 
-    void Caso(Viatura *ptrV,Pessoa *ptrP);
+    void Caso(Viatura *ptrV,Pessoa *ptrP,chamadoPolicial *pilhaChamadosResolvidos);
     
     char* decodificadorSenha(char* senha);
 

@@ -124,13 +124,13 @@ int main(){
             Viatura  *ptrReservaV;
             ptrReservaP= ptrPoI;
             ptrReservaV= ptrVI;
-            LoginViaturas(op2, ptrReservaP, ptrReservaV,iRegular,iEspecializada,LogadasR,LogadasE, ptrPeI);
+            LoginViaturas(op2, ptrReservaP, ptrReservaV,iRegular,iEspecializada,LogadasR,LogadasE, ptrPeI,pilhaChamadosResolvidos);
         }
         else if(op==2){
             printf("Informe o codigo da Viatura:\n ");
             int codigoV;
             scanf(" %d",&codigoV);
-            VerificaUso(codigoV,ptrVI,ptrPeI);
+            VerificaUso(codigoV,ptrVI,ptrPeI,pilhaChamadosResolvidos);
 
         }
         else if(op==3){

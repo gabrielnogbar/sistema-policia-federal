@@ -42,7 +42,7 @@ void ViaturaAtendimento(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&
                     ptrV->qtdChamado++;
                     ptrV->chamadoAtual=ptrR;
                     ptrR= ptrR->prox;
-                    Caso(ptrV,ptrP);
+                    Caso(ptrV,ptrP,pilhaChamadosResolvidos);
                     DisponiveisR++;
                     ptrV->disponivel=0;
                 }
@@ -63,7 +63,7 @@ void ViaturaAtendimento(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&
                     ptrV->qtdChamado++;
                     ptrV->chamadoAtual=ptrE;
                     ptrE= ptrE->prox;
-                    Caso(ptrV,ptrP);
+                    Caso(ptrV,ptrP,pilhaChamadosResolvidos);
                     DisponiveisE++;
                     ptrV->disponivel=0;
                 }
@@ -104,7 +104,7 @@ void Caso(Viatura *ptrV,Pessoa *ptrP,chamadoPolicial  *pilhaChamadosResolvidos){
 }
     ptrV->chamadoAtual->resolvido=1;
     ptrV->chamadoAtual=NULL;
-    empilharChamadoResolvido(ptrV->chamadoAtual);
+    empilharChamadoResolvido(ptrV->chamadoAtual,pilhaChamadosResolvidos);
     } 
 
 void funcoesChamada(Pessoa *ptrP){
@@ -142,7 +142,7 @@ void PesquisarCPF(Pessoa *ptrP){
 void TemChamado(Viatura *ptr,Pessoa *ptrP,chamadoPolicial  *pilhaChamadosResolvidos){
     if(ptr->chamadoAtual !=NULL){
         ptr->qtdChamado++;
-        Caso(ptr,ptrP);
+        Caso(ptr,ptrP,pilhaChamadosResolvidos);
         ptr->disponivel=0;
     }
     else{
