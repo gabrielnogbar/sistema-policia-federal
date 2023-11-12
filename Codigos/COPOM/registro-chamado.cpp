@@ -69,6 +69,7 @@ chamadoPolicial *desenfilerar(chamadoPolicial *&I){
     struct chamadoPolicial *aux;
 
     if (I == NULL){
+        printf("\nlog: !!Não há chamados nessa fila!!\n");
         return NULL;
     }
     else{
@@ -157,7 +158,7 @@ chamadoPolicial *&fEspecializada){
 }   
 
 
-void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial ){
+void distribuidorChamado(Viatura* listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial ){
 
     /*
         Prototipo
@@ -216,4 +217,23 @@ void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegu
     }
 } 
 
+void empilharChamadoResolvido(chamadoPolicial* &chamadoResolvido, chamadoPolicial* &pilha){
+
+    // ->anterior: para ir em direcap ao chamado mais antigo
+    // ->prox: para ir em direcao ao chamado mais recente
+    if(chamadoResolvido != NULL){
+        if (pilha == NULL){
+            pilha = chamadoResolvido;
+        }
+        else{
+            chamadoResolvido->anterior = pilha;
+            chamadoResolvido->prox = NULL;
+            pilha->prox = chamadoResolvido;
+            pilha = chamadoResolvido;
+        }
+        printf("Pilhas: \n");
+        imprimirLista(pilha, "Pilha de chamados resolvidos: \n");
+    }
+    
+}
 

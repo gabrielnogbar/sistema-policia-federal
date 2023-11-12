@@ -3,6 +3,8 @@
 
     #define MAX 100
 
+    struct Viatura;
+    
     struct chamadoPolicial
     {
         int quantViaturas;

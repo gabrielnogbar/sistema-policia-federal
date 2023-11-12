@@ -98,7 +98,8 @@ int main(){
 
     chamadoPolicial *prioridade = NULL; // Ponteito que aponta para o final da fila de prioridade
 
-    
+    chamadoPolicial *pilhaChamadosResolvidos = NULL; // pilha com todos os chamados resolvido
+   
     int op=10;
     do{
         printf("\n1 - Viatura Login\n");
@@ -137,6 +138,20 @@ int main(){
         else if(op==6){
             printf("Ainda não disponivel");
         }
+
+        // Opçõe para teste
+        else if (op==17)
+        {
+            chamadoPolicial* teste = desenfilerar(iRegular);
+            empilharChamadoResolvido(teste, pilhaChamadosResolvidos);
+         
+        }
+        else if (op==18)
+        {
+            chamadoPolicial* teste = desenfilerar(iEspecializada);
+            empilharChamadoResolvido(teste, pilhaChamadosResolvidos);
+        }
+        
 
 
     }while(op!=0);

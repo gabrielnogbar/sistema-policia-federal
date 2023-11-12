@@ -26,6 +26,9 @@
     //Inicia o processo de registro
     void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular, chamadoPolicial* &prioritario,chamadoPolicial *&iEspecializada , chamadoPolicial *&fEspecializada);
 
-     void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial );
+    // Distribui os chamados para as viaturas
+    void distribuidorChamado(Viatura* listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial );
 
+    // Empilha o chamado em uma pilha de chamados resolvidos
+    void empilharChamadoResolvido(chamadoPolicial* &chamadoResolvido, chamadoPolicial* &pilha);
 #endif // 
