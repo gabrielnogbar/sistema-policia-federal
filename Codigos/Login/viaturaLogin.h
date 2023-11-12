@@ -54,9 +54,9 @@
 
     
     //void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV, chamadoPolicial *ptrR, chamadoPolicial *ptrE, int &DisponiveisR,int &DisponiveisE,Pessoa *ptrP);
-    void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP);
+    void LoginViaturas(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP, chamadoPolicial *pilhaChamadosResolvidos);
     
-    void ViaturaAtendimento(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP);
+    void ViaturaAtendimento(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&ptrR, chamadoPolicial *&ptrE,int &DisponiveisR, int &DisponiveisE,Pessoa *ptrP,chamadoPolicial *pilhaChamadosResolvidos);
 
     void IdentificaPMs(int quantidadePM, Policial *ptr, Viatura *ptrV);
 
@@ -70,9 +70,9 @@
 
     bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI);
 
-    void VerificaUso(int Codigo, Viatura *ptr,Pessoa *ptrP);
+    void VerificaUso(int Codigo, Viatura *ptr,Pessoa *ptrP, chamadoPolicial *pilhaChamadosResolvidos);
 
-    void TemChamado(Viatura *ptr,Pessoa *ptrP);
+    void TemChamado(Viatura *ptr,Pessoa *ptrP,chamadoPolicial  *pilhaChamadosResolvidos);
 
 
 #endif //

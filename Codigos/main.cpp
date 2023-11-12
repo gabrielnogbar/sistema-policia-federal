@@ -13,12 +13,13 @@ int main(){
         char tipo[50];
         struct Viatura *newViatura = (struct Viatura *)malloc(sizeof(struct Viatura)); //Criando Viatura
         newViatura->chamadoAtual=NULL;
+        newViatura->Logado=0;
         fscanf(arquivoviaturas," %d", &newViatura->Codigo);
         fscanf(arquivoviaturas," %[^\n]",tipo);
         strcpy(newViatura->Tipo, tipo);
         printf(" %d %s", newViatura->Codigo, newViatura->Tipo);
         newViatura->prox=NULL;
-        if(strcmp(newViatura->Tipo, "regular")){
+        if(strcmp(newViatura->Tipo, "regular")==0){
             newViatura->tipo=0;
         }
         else{
@@ -66,7 +67,7 @@ int main(){
         struct Pessoa *novapessoa= (struct Pessoa *)malloc(sizeof(struct Pessoa));
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->nome);
         fscanf(arquivopessoas," %11s",novapessoa->CPF);
-        printf("%s\n",novapessoa->CPF);
+        //printf("%s\n",novapessoa->CPF);
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->cidade);
         fscanf(arquivopessoas,"  %d",&novapessoa->idade);
         fscanf(arquivopessoas,"  %d",&novapessoa->numeropassagens);
