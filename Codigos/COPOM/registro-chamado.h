@@ -1,11 +1,6 @@
 #ifndef REGISTRO_CHAMADO_H_INCLUDED
 #define REGISTRO_CHAMADO_H_INCLUDED
-
-
-
 #include "../Login/viaturaLogin.h"
-
-    
 
     /*
         Struct dos chamados policiais em geral.
@@ -31,6 +26,6 @@
     //Inicia o processo de registro
     void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular, chamadoPolicial* &prioritario,chamadoPolicial *&iEspecializada , chamadoPolicial *&fEspecializada);
 
-   void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial );
+     void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial );
 
 #endif // 

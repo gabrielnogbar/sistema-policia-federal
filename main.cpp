@@ -101,6 +101,8 @@ int main(){
     
     int op=10;
     do{
+        distribuidorChamado(ptrVI,iRegular,iEspecializada);
+        
         printf("\n1 - Viatura Login\n");
         printf("2 - Viatura em uso\n");
         printf("3 - COPOM\n");

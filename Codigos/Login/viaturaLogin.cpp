@@ -39,6 +39,8 @@ void ViaturaAtendimento(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&
                     ptrV->chamadoAtual=ptrR;
                     ptrR= ptrR->prox;
                     Caso(ptrV,ptrP);
+                    DisponiveisR++;
+                    ptrV->disponivel=0;
                 }
                 else if((op2==1 && ptrR==NULL)){
                     printf(" Sem chamados no momento, VIatura colocada para ronda, Voltando para o menu principal\n");
@@ -49,6 +51,7 @@ void ViaturaAtendimento(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&
                     printf(" Sem chamados no momento, VIatura colocada para ronda, Voltando para o menu principal\n");
                     DisponiveisE ++;
                     op=2;
+                    ptrV->disponivel=0;
                 }
                 else if(op2==2 && ptrE!=NULL){
                     ptrE->viaturaDoChamada=ptrV;
@@ -57,6 +60,7 @@ void ViaturaAtendimento(int op2, Policial *ptr, Viatura *ptrV,chamadoPolicial *&
                     ptrE= ptrE->prox;
                     Caso(ptrV,ptrP);
                     DisponiveisE++;
+                    ptrV->disponivel=0;
                 }
 
             else{

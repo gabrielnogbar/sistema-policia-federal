@@ -9,12 +9,16 @@ void VerificaUso(int Codigo, Viatura *ptr,Pessoa *ptrP){
             TemChamado(ptr,ptrP);
         }
     }
+    if(ptr->Codigo!=Codigo){
+        printf("Codigo errado\n");
+    }
 }
 
 void TemChamado(Viatura *ptr,Pessoa *ptrP){
     if(ptr->chamadoAtual !=NULL){
         ptr->qtdChamado++;
         Caso(ptr,ptrP);
+        ptr->disponivel=0;
     }
     else{
         printf("Sem chamado ou pedido de reforço, retornando ao menu \n");
