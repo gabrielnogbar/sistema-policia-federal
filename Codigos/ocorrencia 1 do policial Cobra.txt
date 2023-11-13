@@ -1,0 +1,6 @@
+Tipo de Policia: regular 
+Descrição da ocorrencia: 1 
+Local do ocorrido: 1 
+Viatura que atendeu o chamado: 1 
+Policiais: ,,Cobra,Joviral,
+Presos: Nenhum 
