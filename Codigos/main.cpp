@@ -190,7 +190,7 @@ int main(){
             empilharChamadoResolvido(teste, pilhaChamadosResolvidos);
         }
 
-else if (op==19)
+        else if (op==19)
         {
             imprimirLista(pilhaChamadosResolvidos, "Pilha de chamados resolvidos");
         }
@@ -212,6 +212,7 @@ else if (op==19)
 
         ptrVI = copiaViatura;
         selectionSortViaturas(ptrVI);
+        ptrVI = copiaViatura;
     }while(op!=0);
 
     return 0;

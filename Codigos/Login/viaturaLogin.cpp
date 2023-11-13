@@ -102,7 +102,7 @@ void Caso(Viatura* &ptrV,Pessoa *ptrP,chamadoPolicial* &pilhaChamadosResolvidos)
     printf("\nInformações do chamado: \n");
     printf("Descrição: %s \n",ptrV->chamadoAtual->descricao);
     printf("Localização: %s \n", ptrV->chamadoAtual->local);
-    printf(" 1- Confirmar ação policial       2- Ação Dispensada");
+    printf(" 1- Confirmar ação policial       2- Ação Dispensada\n");
     int op;
     scanf(" %d",&op);
     if(op==1){
