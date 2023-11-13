@@ -1,11 +1,9 @@
 #include<stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "viaturaLogin.h"
+#include "../COPOM/registro-chamado.h"
 
-
-
-char* decodificadorSenha(char* senha){
+char* codificadorSenha(char* senha){
 
     char auxiliar[30];
     int iFinal =0;
@@ -42,17 +40,18 @@ char* decodificadorSenha(char* senha){
         
         
     }    
-    while (auxiliar[iFinal] != '\0'){
+while (auxiliar[iFinal] != '\0'){
             iFinal++;
-    }
+            }
 
-    for (int i = 0; i <iFinal; i++) { 
+            for (int i = 0; i <iFinal; i++) { 
         senhaDescrip[iFinal-1 - i] = auxiliar[i];
-    }
+}
     //strcpy(senha, senhaDescrip);
     return senhaDescrip;
 }
 
+/*
 int main(){
     char senha[30];
     scanf(" %s", senha);
@@ -63,7 +62,7 @@ int main(){
     free(senhaDecodificada);
     return 0;
 }
-
+*/
 
 /*
     Função de verificação usuário/senha;
@@ -73,13 +72,13 @@ int main(){
 
 bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI){
 
-    char* senhaDecodificada = decodificadorSenha(senha);
-    printf(senhaDecodificada);
+    char* senhacodificada = codificadorSenha(senha);
+    //printf(senhaDecodificada);
 
     while(ptrPoI != NULL){
 
         if (strcmp(ptrPoI->nomeGuerra, usuario)==0){
-            if (strcmp(ptrPoI->senha, senhaDecodificada)==0){
+            if (strcmp(ptrPoI->senha, senhacodificada)==0){
                 return true;
             }
             else{
