@@ -1,3 +1,14 @@
+/*
+    Notas Importantes:
+        - Comando para compilar:
+            cd codigos
+            gcc main.cpp COPOM/registro-chamado.cpp Login/viaturaLogin.cpp -o main.exe
+            
+*/
+
+
+
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -152,7 +163,7 @@ int main(){
             scanf(" %s", nome);
             printf("\nSenha: ");
             scanf(" %s", senha);
-            LoginPM(ptrPoI,senha,nome,pilhaChamadosResolvidos);
+            //LoginPM(ptrPoI,senha,nome,pilhaChamadosResolvidos);
         }
         else if(op==5){
             printf("Ainda não disponivel");
@@ -163,7 +174,7 @@ int main(){
             scanf(" %s", nome);
             printf("\nSenha: ");
             scanf(" %s", senha);
-            Comandante(ptrPoI,senha,nome,pilhaChamadosResolvidos);
+            //Comandante(ptrPoI,senha,nome,pilhaChamadosResolvidos);
         }
 
         // Opçõe para teste

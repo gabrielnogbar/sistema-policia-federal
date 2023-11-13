@@ -13,7 +13,7 @@ void LoginViaturas(int op2, Policial *ptr, Viatura* &ptrV,chamadoPolicial *&ptrR
     int codigoViatura;
     //Viatura *prtVI= ptrV; //Criando um ponteiro reserva pra percorrer em caso de chamado
     
-    printf("Código da Viatura:\n");
+    printf("Código da Viatura: \n");
     scanf(" %d", &codigoViatura);
     while(ptrV != NULL && codigoViatura != ptrV->Codigo){
         ptrV=ptrV->prox;
@@ -35,6 +35,7 @@ void ViaturaAtendimento(int op2, Policial *ptr, Viatura *&ptrV,chamadoPolicial *
     scanf(" %d", &quantidadePM);
     if ((op2==1 && quantidadePM>=2 && quantidadePM<=4)|| (op2==2 && quantidadePM==4 )){
         IdentificaPMs(quantidadePM, ptr, ptrV);// Aqui passar o ponteiro inicial dos policiais e o ponteiro da viatura usada.
+
             printf("1- Apto para atender ocorrência\n");
             printf("2- Cancelar Embarcação\n");
             ptrV->disponivel=0;
@@ -98,6 +99,7 @@ void IdentificaPMs(int quantidadePM, Policial *ptr, Viatura *&ptrV){
 
 }
 void Caso(Viatura* &ptrV,Pessoa *ptrP,chamadoPolicial* &pilhaChamadosResolvidos){
+    printf("\nInformações do chamado: \n");
     printf("Descrição: %s \n",ptrV->chamadoAtual->descricao);
     printf("Localização: %s \n", ptrV->chamadoAtual->local);
     printf(" 1- Confirmar ação policial       2- Ação Dispensada");
@@ -126,13 +128,13 @@ void funcoesChamada(Pessoa *ptrP){
         PesquisarCPF(ptrP);
     }
     else if(op==2){
-        printf("log: Ainda não disponivel!");
+        printf("log: Ainda não disponivel!\n");
     }
     else if(op==3){
-        printf("log: Ainda não disponivel!");
+        printf("log: Ainda não disponivel!\n");
     }
     else if(op==4){
-        
+        printf("\nChamado encerrado!\n");
     }
 
 
@@ -242,7 +244,7 @@ int main(){
     char senha[30];
     scanf(" %s", senha);
 
-    char* senhaDecodificada = decodificadorSenha(senha);
+    char* senhaDecodificada = codificadorSenha(senha);
     printf("%s\n",senhaDecodificada);
 
     free(senhaDecodificada);
