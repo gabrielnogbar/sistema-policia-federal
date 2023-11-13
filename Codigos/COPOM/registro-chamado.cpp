@@ -111,10 +111,13 @@ chamadoPolicial *&fEspecializada){
     printf("\n          SPM - COPOM\n\n");
     printf("Resgistrar chamado: \n");
     printf("Policia Normal - 1   Especializada - 2: \n");
-    do{
     scanf("%d", &tipo);
-    }while (tipo != 1 && tipo != 2){
-        printf("\nEntrada inválida!!\nTente novamente\n")
+    while (tipo != 1 && tipo != 2){
+
+        printf("\nEntrada inválida!!\nTente novamente\n");
+        printf("Resgistrar chamado: \n");
+        printf("Policia Normal - 1   Especializada - 2: \n");
+        scanf("%d", &tipo);
     };
     
     

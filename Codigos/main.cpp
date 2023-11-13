@@ -211,7 +211,7 @@ else if (op==19)
         
 
         ptrVI = copiaViatura;
-        selectionSortViaturas(ptrVI);
+        //selectionSortViaturas(ptrVI);
     }while(op!=0);
 
     return 0;
