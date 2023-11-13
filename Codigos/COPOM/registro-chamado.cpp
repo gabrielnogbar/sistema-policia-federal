@@ -181,21 +181,23 @@ void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegu
         
     }
     else{
-        // Verificadores: para definir se a fila esta vazia ou nao;
-        bool regular = true;
-        bool especial = true;
 
-        if (chamadosRegular == NULL){
-            regular = false;
-        }
-        if (chamadosEspecial == NULL){
-            especial = false;
-        }
 
         // percorrer viaturas
 
         while (viatura != NULL){
+            
+            // Verificadores: para definir se a fila esta vazia ou nao;
+            bool regular = true;
+            bool especial = true;
 
+            if (chamadosRegular == NULL){
+                regular = false;
+            }
+            if (chamadosEspecial == NULL){
+                especial = false;
+            }
+            
             if (viatura->disponivel == 0 && viatura->Logado==1 && viatura->chamadoAtual == NULL){
 
                 if (viatura->tipo == 0 && regular){ // se for tipo regular e haver chamados regular
