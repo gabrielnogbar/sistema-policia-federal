@@ -77,7 +77,7 @@
 
     void LoginPM(Policial *ptrP, char *senha,char *nome,chamadoPolicial *pilhaResolvidos);
 
-    void Comandante(Policial *ptrP,char *senha, char *nome, chamadoPolicial *pilhaResolvidos);
+    void Comandante(Policial *ptrP,char *senha, char *nome, chamadoPolicial *&pilhaResolvidos);
 
     void selectionSortViaturas(Viatura*&inicio);
 

@@ -2,7 +2,7 @@
     Notas Importantes:
         - Comando para compilar:
             cd codigos
-            gcc main.cpp COPOM/registro-chamado.cpp Login/viaturaLogin.cpp -o main.exe
+            gcc main.cpp COPOM/registro-chamado.cpp Login/viaturaLogin.cpp -o main.exe 
             
 */
 
