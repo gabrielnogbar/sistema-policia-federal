@@ -365,6 +365,24 @@ void Comandante(Policial *ptrP,char *senha, char *nome, chamadoPolicial *pilhaRe
                         break;
             }*/
 
+
+void trocarViaturas(Viatura*& head, Viatura* prevA, Viatura* a, Viatura* prevB, Viatura* b) {
+    if (prevA != NULL) {
+        prevA->prox = b;
+    } else {
+        head = b;
+    }
+
+    if (prevB != a) {
+        prevB->prox = a;
+    } else {
+        head = a;
+    }
+
+    Viatura* temp = b->prox;
+    b->prox = a->prox;
+    a->prox = temp;
+}
 void selectionSortViaturas(Viatura*&inicio) {
     Viatura *i, *j, *prevI = NULL, *prevJ = NULL;
     for (i = inicio; i != NULL; i = i->prox) {
@@ -383,21 +401,4 @@ void selectionSortViaturas(Viatura*&inicio) {
             }
         }
     }
-}
-void trocarViaturas(Viatura*& head, Viatura* prevA, Viatura* a, Viatura* prevB, Viatura* b) {
-    if (prevA != NULL) {
-        prevA->prox = b;
-    } else {
-        head = b;
-    }
-
-    if (prevB != NULL) {
-        prevB->prox = a;
-    } else {
-        head = a;
-    }
-
-    Viatura* temp = a->prox;
-    a->prox = b->prox;
-    b->prox = temp;
 }
