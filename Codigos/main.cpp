@@ -2,8 +2,10 @@
     Notas Importantes:
         - Comando para compilar:
             cd codigos
-            gcc main.cpp COPOM/registro-chamado.cpp Login/viaturaLogin.cpp -o main.exe 
+            gcc main.cpp COPOM/registro-chamado.cpp Login/viaturaLogin.cpp -o main.exe -Wall
             
+        - O progama está configurado para rodar corretamente em windows,
+            caso esteja rodando em outro sistema operacional, reconfigure os arquivos .json
 */
 
 
@@ -22,7 +24,7 @@ int main(){
     arquivoviaturas= fopen("../documentos/viaturas.txt","r");
     for(int i=0;i<10;i++){
         char tipo[50];
-        struct Viatura *newViatura = (struct Viatura *)malloc(sizeof(struct Viatura)); //Criando Viatura
+        struct Viatura *newViatura = (struct Viatura *)calloc(1, sizeof(struct Viatura)); //Criando Viatura
         newViatura->chamadoAtual=NULL;
         newViatura->Logado=0;
         fscanf(arquivoviaturas," %d", &newViatura->Codigo);
@@ -58,7 +60,7 @@ int main(){
     FILE * arquivopolicia;
     arquivopolicia= fopen("../documentos/policiais.txt","r");
     for(int i=0; i<15; i++){
-        struct Policial *policia = (struct Policial *)malloc(sizeof(struct Policial));
+        struct Policial *policia = (struct Policial *)calloc(1,sizeof(struct Policial));
         fscanf(arquivopolicia," %[^\n]",policia->nome);
         fscanf(arquivopolicia," %d",&policia->CPF);
         fscanf(arquivopolicia," %[^\n]",policia->nomeGuerra);
@@ -83,7 +85,7 @@ int main(){
     FILE * arquivopessoas;
     arquivopessoas= fopen("../documentos/pessoas.txt","r");
     while(!feof(arquivopessoas)){
-        struct Pessoa *novapessoa= (struct Pessoa *)malloc(sizeof(struct Pessoa));
+        struct Pessoa *novapessoa= (struct Pessoa *)calloc(1,sizeof(struct Pessoa));
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->nome);
         fscanf(arquivopessoas," %11s",novapessoa->CPF);
         //printf("%s\n",novapessoa->CPF);
@@ -208,11 +210,17 @@ int main(){
             printf("\n----------------------------------------+\n");
 
         }
-        
 
-        ptrVI = copiaViatura;
-        selectionSortViaturas(ptrVI);
-        ptrVI = copiaViatura;
+        else if(op == 0){            
+            desalocarMemorias(ptrVI, ptrPoI, ptrPeI, iRegular, iEspecializada, pilhaChamadosResolvidos);
+        }
+
+        if(op!=0){
+            ptrVI = copiaViatura;
+            selectionSortViaturas(ptrVI);
+            ptrVI = copiaViatura;
+        }
+        
     }while(op!=0);
 
     return 0;

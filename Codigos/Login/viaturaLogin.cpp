@@ -193,9 +193,10 @@ void VerificaUso(int Codigo, Viatura *&ptr,Pessoa *ptrP,chamadoPolicial* &pilhaC
 
 char* codificadorSenha(char* senha){
 
-    char auxiliar[30];
+    char auxiliar[100];
     int iFinal =0;
     char* senhaDescrip = (char *)calloc(30, sizeof(char));
+    //char senhaDescrip[100];
 
     for (int i=0; senha[i] != '\0'; i++){
 
@@ -228,15 +229,15 @@ char* codificadorSenha(char* senha){
         
         
     }    
-while (auxiliar[iFinal] != '\0'){
-            iFinal++;
-            }
+    while (auxiliar[iFinal] != '\0'){
+                iFinal++;
+                }
 
-            for (int i = 0; i <iFinal; i++) { 
-        senhaDescrip[iFinal-1 - i] = auxiliar[i];
-}
-    //strcpy(senha, senhaDescrip);
-    return senhaDescrip;
+                for (int i = 0; i <iFinal; i++) { 
+            senhaDescrip[iFinal-1 - i] = auxiliar[i];
+    }
+        //strcpy(senha, senhaDescrip);
+        return senhaDescrip;
 }
 
 /*
@@ -269,11 +270,13 @@ bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI){
             printf("%s\n", ptrPoI->senha);
             printf("%s\n", ptrPoI->nomeGuerra);
             if (strcmp(ptrPoI->senha, senhacodificada)==0){
+                free(senhacodificada);
                 return true;
             }
         }
         ptrPoI=ptrPoI->prox;
     }
+    free(senhacodificada);
     return false;
 }
 
@@ -403,4 +406,57 @@ void trocarViaturas(Viatura*& head, Viatura* prevA,
     Viatura* temp = a->prox;
     a->prox = b->prox;
     b->prox = temp;
+}
+
+void desalocarViaturas(Viatura* &lst){
+
+    while (lst != NULL){
+        Viatura *p = lst;
+
+        lst = lst->prox;
+        free(p);
+    }
+}
+
+void desalocarPessoas(Pessoa* &lst){
+
+    while (lst != NULL){
+        Pessoa *p = lst;
+
+        lst = lst->prox;
+        free(p);
+    }
+}
+
+void desalocarPoliciais(Policial* &lst){
+
+    while (lst != NULL){
+        Policial *p = lst;
+
+        lst = lst->prox;
+        free(p);
+    }
+}
+
+void desalocarChamados(chamadoPolicial* &lst){
+
+    
+    while (lst != NULL){
+        chamadoPolicial *p = lst;
+        lst = lst->anterior;
+        free(p);
+    }
+}
+
+
+void desalocarMemorias(Viatura* &ptrViatura, Policial* &ptrPolicia, Pessoa* &ptrPessoa, chamadoPolicial* &ptrChamadoRegular, chamadoPolicial* &ptrChamadoEspecial, chamadoPolicial* &ptrPilhaChamados){
+
+    desalocarChamados(ptrChamadoRegular);
+    desalocarChamados(ptrChamadoRegular);
+    desalocarChamados(ptrPilhaChamados);
+
+    desalocarPessoas(ptrPessoa);
+    desalocarPoliciais(ptrPolicia);
+    desalocarViaturas(ptrViatura);
+    
 }

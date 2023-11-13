@@ -31,4 +31,20 @@
 
     // Empilha o chamado em uma pilha de chamados resolvidos
     void empilharChamadoResolvido(chamadoPolicial* &chamadoResolvido, chamadoPolicial* &pilha);
+
+    // Desaloca viaturas
+    void desalocarViaturas(Viatura* &lst);
+
+    // Desaloca pessoas
+    void desalocarPessoas(Pessoa* &lst);
+
+    // Desaloca policiais
+    void desalocarPoliciais(Policial* &lst);
+
+    // Desaloca chamados
+    void desalocarChamados(chamadoPolicial* &lst);
+
+    // Desaloca tudo
+    void desalocarMemorias(Viatura* &ptrViatura, Policial* &ptrPolicia, Pessoa* &ptrPessoa, chamadoPolicial* &ptrChamadoRegular, chamadoPolicial* &ptrChamadoEspecial, chamadoPolicial* &ptrPilhaChamados);
+
 #endif // 
