@@ -25,6 +25,9 @@ int main(){
         else{
             newViatura->tipo=1;
         }
+        newViatura->disponivel = 0;
+        newViatura->Logado = 0;
+        
         if(ptrVA== NULL){
             ptrVA= newViatura;
             ptrVI= newViatura;
@@ -32,6 +35,7 @@ int main(){
         else{
             ptrVA->prox = newViatura;
             ptrVA=newViatura;
+            ptrVA->prox = NULL;
         }       
     }
     fclose(arquivoviaturas);
@@ -102,9 +106,11 @@ int main(){
     chamadoPolicial *prioridade = NULL; // Ponteito que aponta para o final da fila de prioridade
 
     chamadoPolicial *pilhaChamadosResolvidos = NULL; // pilha com todos os chamados resolvido
-   
+    Viatura *copiaViatura = ptrVI;
     int op=10;
     do{
+        
+
         distribuidorChamado(ptrVI,iRegular,iEspecializada);
         printf("\n1 - Viatura Login\n");
         printf("2 - Viatura em uso\n");
@@ -115,6 +121,7 @@ int main(){
         printf("0 - Encerrar Programa\n");
         scanf("%d", &op);
 
+        ptrVI = copiaViatura;
         if (op==1){
             int op2=0;
             printf("1 - Policia Regular\n");
@@ -165,8 +172,22 @@ int main(){
             imprimirLista(pilhaChamadosResolvidos, "Pilha de chamados resolvidos");
         }
         
+        else if (op==20){
+            printf("\n----------------------------------------+\n");
+ 
+            printf("\n FILA REGULAR:\n");
+            imprimirLista(iRegular, "fila regular");
 
 
+            printf("\nFILA ESPECIALIZADA:\n");
+            imprimirLista(iEspecializada, "fila especializada");
+            printf("apagar essas impressoes após os testes ^\n");
+            printf("\n----------------------------------------+\n");
+
+        }
+        
+
+        ptrVI = copiaViatura;
     }while(op!=0);
 
     return 0;

@@ -26,6 +26,7 @@ void enfilerar(chamadoPolicial *nova, chamadoPolicial *&I, chamadoPolicial *&F){
     else{
         F->anterior = celula;
         celula->prox = F;
+        celula->anterior = NULL;
         F = celula;
     }
 }
@@ -44,6 +45,7 @@ void enfilerarPrioridade(chamadoPolicial* nova, chamadoPolicial* &I, chamadoPoli
     else if(PrioridadeF == NULL){
         PrioridadeF = celula;
         PrioridadeF->anterior = I;
+        PrioridadeF->prox =NULL;
         I->prox = PrioridadeF;
         I = PrioridadeF;
     }
@@ -74,8 +76,14 @@ chamadoPolicial *desenfilerar(chamadoPolicial *&I){
     }
     else{
         aux = I;
-        I = aux->anterior;
-
+        if(I->anterior != NULL){
+            I = I->anterior;
+            I->prox = NULL;
+        }
+        else{
+            I = NULL;
+        }
+        
         return aux;
     }
 }
@@ -158,7 +166,7 @@ chamadoPolicial *&fEspecializada){
 }   
 
 
-void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial ){
+void distribuidorChamado(Viatura* listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial ){
 
     /*
         Prototipo
@@ -172,17 +180,18 @@ void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegu
    // ponteiro para percorrer as listas
    Viatura* viatura = listaViaturas;
 
-    printf("\n**** RADIO ****\n\n");
+    
     // Verificar se as filas de chamados estao vazios
     if(chamadosRegular == NULL && chamadosEspecial == NULL){
         
+        printf("\n**** RADIO ****\n\n");
         // TODO: Revisar se deixa ou tira esse print
         printf("\n--- Não há nenhum chamado ---\n***************\n");
         
     }
     else{
 
-
+        printf("\n**** RADIO ****\n\n");
         // percorrer viaturas
 
         while (viatura != NULL){
@@ -197,12 +206,24 @@ void distribuidorChamado(Viatura* &listaViaturas, chamadoPolicial* &chamadosRegu
             if (chamadosEspecial == NULL){
                 especial = false;
             }
+            printf("\ncod: %d, disponivel: %d, logado: %d \n", viatura->Codigo, viatura->chamadoAtual->descricao,viatura->disponivel, viatura->Logado);
             
             if (viatura->disponivel == 0 && viatura->Logado==1 && viatura->chamadoAtual == NULL){
-
+                
+                printf("\n entrou em A\n");
+                printf("\ntipo: %d; disponivel: %d; logado: %d  \n", viatura->tipo, viatura->disponivel, viatura->Logado);
+                if (regular){
+                    printf("True");
+                }
+                else{
+                    printf("False");
+                }
                 if (viatura->tipo == 0 && regular){ // se for tipo regular e haver chamados regular
-                    viatura->chamadoAtual = desenfilerar(chamadosRegular);
+                    printf("\n entrou em B\n");
+                    chamadoPolicial *chamadoParaAtribuir = desenfilerar(chamadosRegular);
+                    viatura->chamadoAtual = chamadoParaAtribuir;
                     viatura->disponivel = 1;
+                    chamadoParaAtribuir->viaturaDoChamada = viatura;
 
                     printf("Viatura %d regular recebeu um chamado %s\n", viatura->Codigo, viatura->chamadoAtual->descricao);
                 }
