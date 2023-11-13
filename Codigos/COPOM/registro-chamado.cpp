@@ -206,7 +206,7 @@ void distribuidorChamado(Viatura* listaViaturas, chamadoPolicial* &chamadosRegul
             if (chamadosEspecial == NULL){
                 especial = false;
             }
-            printf("\ncod: %d, disponivel: %d, logado: %d \n", viatura->Codigo, viatura->chamadoAtual->descricao,viatura->disponivel, viatura->Logado);
+            printf("\ncod: %d, disponivel: %d, logado: %d \n", viatura->Codigo,viatura->disponivel, viatura->Logado);
             
             if (viatura->disponivel == 0 && viatura->Logado==1 && viatura->chamadoAtual == NULL){
                 

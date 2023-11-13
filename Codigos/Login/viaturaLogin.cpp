@@ -10,9 +10,8 @@ void LoginViaturas(int op2, Policial *ptr, Viatura* &ptrV,chamadoPolicial *&ptrR
 { // Aqui terei que passar o ponteiro inicial da lista de policiais, de viaturas.
 
     
-    int codigoViatura,quantidadePM;
-    int op=0;
-    Viatura *prtVI= ptrV; //Criando um ponteiro reserva pra percorrer em caso de chamado
+    int codigoViatura;
+    //Viatura *prtVI= ptrV; //Criando um ponteiro reserva pra percorrer em caso de chamado
     
     printf("Código da Viatura:\n");
     scanf(" %d", &codigoViatura);
@@ -187,3 +186,122 @@ void VerificaUso(int Codigo, Viatura *&ptr,Pessoa *ptrP,chamadoPolicial* &pilhaC
         printf("Codigo errado ou viatura não logada\n");
     }
 }
+
+char* codificadorSenha(char* senha){
+
+    char auxiliar[30];
+    int iFinal =0;
+    char* senhaDescrip = (char *)calloc(30, sizeof(char));
+
+    for (int i=0; senha[i] != '\0'; i++){
+
+        if (65 <= senha[i] && senha[i] <= 90){
+
+            if (senha[i] + 3 > 90){
+                auxiliar[i] = (senha[i] + 3)- 26;
+            }
+            else{
+                auxiliar[i] = senha[i] + 3;
+            }
+
+        }
+        else if (97 <= senha[i] && senha[i] <= 122){
+
+            if (senha[i] + 3 > 122){
+                auxiliar[i] = senha[i] + 3 - 26;
+            }
+            else{
+                auxiliar[i] = senha[i] + 3;
+            }
+
+        }
+
+        else if (48 <= senha[i] && senha[i] <= 57){
+            auxiliar[i]= senha[i];
+        }
+
+       
+        
+        
+    }    
+while (auxiliar[iFinal] != '\0'){
+            iFinal++;
+            }
+
+            for (int i = 0; i <iFinal; i++) { 
+        senhaDescrip[iFinal-1 - i] = auxiliar[i];
+}
+    //strcpy(senha, senhaDescrip);
+    return senhaDescrip;
+}
+
+/*
+int main(){
+    char senha[30];
+    scanf(" %s", senha);
+
+    char* senhaDecodificada = decodificadorSenha(senha);
+    printf("%s\n",senhaDecodificada);
+
+    free(senhaDecodificada);
+    return 0;
+}
+*/
+
+/*
+    Função de verificação usuário/senha;
+    Entrada: Ponteiro para a fila de infomações dos policias / nome / 
+    Saida: true se as credenciais estarem corretas e falso caso contrario;
+*/
+
+bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI){
+    printf("%s\n",senha);
+    char* senhacodificada = codificadorSenha(senha);
+    printf("%s",senhacodificada);
+
+    while(ptrPoI != NULL){
+
+        if (strcmp(ptrPoI->nomeGuerra, usuario)==0){
+            printf("%s", ptrPoI->nomeGuerra);
+            if (strcmp(ptrPoI->senha, senhacodificada)==0){
+                return true;
+            }
+        }
+        ptrPoI++;
+    }
+    return false;
+}
+
+void LoginPM(Policial *ptrP, char *senha,char *nome,chamadoPolicial *pilhaResolvidos){
+    bool login= validarUsuario(nome, senha, ptrP);
+    if(login==true){
+        for(;pilhaResolvidos->anterior!=NULL;pilhaResolvidos=pilhaResolvidos->anterior){
+        }
+        for(;pilhaResolvidos->prox!=NULL;pilhaResolvidos=pilhaResolvidos->prox){
+            for(int i=0; i<4;i++){
+                if(strcmp(pilhaResolvidos->viaturaDoChamada->policiais[i],nome)==0 && (pilhaResolvidos->boletim==0)){
+                    printf("Descrição: %s \n",pilhaResolvidos->descricao);
+                    printf("Local: %s\n", pilhaResolvidos->local);
+                    printf("Quer fazer boletim desse chamado? \n");
+                    printf("1- Se sim  2-Se não: \n");
+                    int op;
+                    scanf(" %d", &op);
+                    if(op==1){
+                        pilhaResolvidos->boletim=1;
+                        char nomearquivo[100];
+                        FILE *pt;
+                        sprintf(nomearquivo, "ocorrencia %s do policial %s.txt", pilhaResolvidos->descricao, nome);
+                        pt=fopen(nomearquivo,"a+");
+                        fprintf(pt,"Descrição da ocorrencia: %s \n",pilhaResolvidos->descricao);
+                        fprintf(pt,"Local do ocorrido: %s",pilhaResolvidos->local);
+                        fprintf(pt,"Viatura que atendeu o chamado: %d",pilhaResolvidos->viaturaDoChamada->Codigo);
+                        fclose(pt);
+                    }
+                };
+            }
+        }
+    }
+    else{
+        printf("senha não correta \n");
+    }
+    }

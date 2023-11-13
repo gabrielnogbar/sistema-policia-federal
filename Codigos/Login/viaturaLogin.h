@@ -75,6 +75,6 @@
 
     void TemChamado(Viatura *ptr,Pessoa *ptrP,chamadoPolicial* &pilhaChamadosResolvidos);
 
-    void LoginPM(Policial *ptrP, char *senha,char *nome);
+    void LoginPM(Policial *ptrP, char *senha,char *nome,chamadoPolicial *pilhaResolvidos);
 
 #endif //
