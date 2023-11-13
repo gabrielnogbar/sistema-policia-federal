@@ -14,7 +14,7 @@
         struct chamadoPolicial *anterior;
         Viatura *viaturaDoChamada; // Ponteiro para a viatura que atendeu ao chamado
         int resolvido; // 0 não 1 sim
-        int boletim=0; // 0 não tem 1 tem ja
+        char boletim[4][200]; // 0 não tem 1 tem ja
     };
 
     struct Policial{
@@ -76,5 +76,11 @@
     void TemChamado(Viatura *ptr,Pessoa *ptrP,chamadoPolicial* &pilhaChamadosResolvidos);
 
     void LoginPM(Policial *ptrP, char *senha,char *nome,chamadoPolicial *pilhaResolvidos);
+
+    void Comandante(Policial *ptrP,char *senha, char *nome, chamadoPolicial *pilhaResolvidos);
+
+    void selectionSortViaturas(Viatura*&inicio);
+
+    void trocarViaturas(Viatura*& head, Viatura* prevA, Viatura* a, Viatura* prevB, Viatura* b) ;
 
 #endif //

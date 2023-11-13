@@ -18,9 +18,11 @@ void LoginViaturas(int op2, Policial *ptr, Viatura* &ptrV,chamadoPolicial *&ptrR
     while(ptrV != NULL && codigoViatura != ptrV->Codigo){
         ptrV=ptrV->prox;
     }
-    ptrV->Logado=1;
+    if(ptrV !=NULL){
+        ptrV->Logado=1;
     if(ptrV->Logado==1){
         ViaturaAtendimento(op2,ptr, ptrV,ptrR,ptrE,DisponiveisR, DisponiveisE,ptrP,pilhaChamadosResolvidos);
+        }
     }
     else{
         printf("Codigo errado");
@@ -257,17 +259,18 @@ int main(){
 bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI){
     printf("%s\n",senha);
     char* senhacodificada = codificadorSenha(senha);
-    printf("%s",senhacodificada);
+    printf("%s\n",senhacodificada);
 
     while(ptrPoI != NULL){
 
         if (strcmp(ptrPoI->nomeGuerra, usuario)==0){
-            printf("%s", ptrPoI->nomeGuerra);
+            printf("%s\n", ptrPoI->senha);
+            printf("%s\n", ptrPoI->nomeGuerra);
             if (strcmp(ptrPoI->senha, senhacodificada)==0){
                 return true;
             }
         }
-        ptrPoI++;
+        ptrPoI=ptrPoI->prox;
     }
     return false;
 }
@@ -275,11 +278,15 @@ bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI){
 void LoginPM(Policial *ptrP, char *senha,char *nome,chamadoPolicial *pilhaResolvidos){
     bool login= validarUsuario(nome, senha, ptrP);
     if(login==true){
-        for(;pilhaResolvidos->anterior!=NULL;pilhaResolvidos=pilhaResolvidos->anterior){
+        if(pilhaResolvidos->anterior==NULL){
+            printf("Pilha Nula");
         }
-        for(;pilhaResolvidos->prox!=NULL;pilhaResolvidos=pilhaResolvidos->prox){
-            for(int i=0; i<4;i++){
-                if(strcmp(pilhaResolvidos->viaturaDoChamada->policiais[i],nome)==0 && (pilhaResolvidos->boletim==0)){
+        while (pilhaResolvidos->anterior != NULL) {
+            pilhaResolvidos = pilhaResolvidos->anterior;
+        }
+        while (pilhaResolvidos != NULL) {
+            for (int i = 0; i < 4; i++) {
+                if (strcmp(pilhaResolvidos->viaturaDoChamada->policiais[i], nome) == 0 ){
                     printf("Descrição: %s \n",pilhaResolvidos->descricao);
                     printf("Local: %s\n", pilhaResolvidos->local);
                     printf("Quer fazer boletim desse chamado? \n");
@@ -287,21 +294,110 @@ void LoginPM(Policial *ptrP, char *senha,char *nome,chamadoPolicial *pilhaResolv
                     int op;
                     scanf(" %d", &op);
                     if(op==1){
-                        pilhaResolvidos->boletim=1;
-                        char nomearquivo[100];
-                        FILE *pt;
-                        sprintf(nomearquivo, "ocorrencia %s do policial %s.txt", pilhaResolvidos->descricao, nome);
-                        pt=fopen(nomearquivo,"a+");
-                        fprintf(pt,"Descrição da ocorrencia: %s \n",pilhaResolvidos->descricao);
-                        fprintf(pt,"Local do ocorrido: %s",pilhaResolvidos->local);
-                        fprintf(pt,"Viatura que atendeu o chamado: %d",pilhaResolvidos->viaturaDoChamada->Codigo);
-                        fclose(pt);
+                        printf("Digite o Boletim \n");
+                        scanf(" %[^\n]",pilhaResolvidos->boletim[i]);
                     }
                 };
             }
+            pilhaResolvidos = pilhaResolvidos->prox;
         }
     }
     else{
         printf("senha não correta \n");
     }
     }
+void Comandante(Policial *ptrP,char *senha, char *nome, chamadoPolicial *pilhaResolvidos){
+     char* senhacodificada = codificadorSenha(senha);
+     while(ptrP != NULL){
+
+        if (strcmp(ptrP->nomeGuerra, nome)==0){
+            printf("%s\n", ptrP->senha);
+            printf("%s\n", ptrP->nomeGuerra);
+            if (strcmp(ptrP->senha, senhacodificada)==0 && (strcmp(ptrP->cargo,"Comandante Geral")==0)){
+                printf("Deseja Fazer O Relatorio do Dia? Digite 1 se sim 2 se não \n");
+                int op;
+                scanf(" %d",&op);
+                if(op==1){
+                    if (pilhaResolvidos == NULL) {
+                printf("A lista de ocorrências resolvidas está vazia.\n");
+                        return; }
+                     while (pilhaResolvidos->anterior != NULL) {
+                    pilhaResolvidos = pilhaResolvidos->anterior;
+                    }
+                        char nomearquivo[100];
+                        FILE *pt;
+                        sprintf(nomearquivo, "ocorrencia %s do policial %s.txt", pilhaResolvidos->descricao, nome);
+                        pt=fopen(nomearquivo,"w+");
+                        while(pilhaResolvidos!=NULL){
+                        fprintf(pt,"Tipo de Policia: %s \n",pilhaResolvidos->viaturaDoChamada->Tipo);
+                        fprintf(pt,"Descrição da ocorrencia: %s \n",pilhaResolvidos->descricao);
+                        fprintf(pt,"Local do ocorrido: %s \n",pilhaResolvidos->local);
+                        fprintf(pt,"Viatura que atendeu o chamado: %d \n",pilhaResolvidos->viaturaDoChamada->Codigo);
+                        fprintf(pt,"Policiais: ");
+                        for(int i=0;i<4;i++){
+                            if(pilhaResolvidos->viaturaDoChamada->policiais[i]!=NULL){
+                                fprintf(pt,"%s ",pilhaResolvidos->viaturaDoChamada->policiais[i]);
+                        }}
+                        fprintf(pt,"\n");
+                        fprintf(pt,"Presos: Nenhum \n");
+                        pilhaResolvidos=pilhaResolvidos->prox;
+                        }
+                        fclose(pt);
+                        break;
+                    }
+                
+                else{
+                        printf("Voltando ao menu");
+                        break;
+                    }
+                }
+
+        }
+        ptrP=ptrP->prox;
+    }
+    if(ptrP==NULL){
+        printf("Policial Não achado");
+    }
+}
+
+               /*  else{
+                        printf("Senha ou nome do comandante errado");
+                        break;
+            }*/
+
+void selectionSortViaturas(Viatura*&inicio) {
+    Viatura *i, *j, *prevI = NULL, *prevJ = NULL;
+    for (i = inicio; i != NULL; i = i->prox) {
+        Viatura* min = i;
+        for (j = i->prox; j != NULL; j = j->prox) {
+            if (j->qtdChamado < min->qtdChamado) {
+                min = j;
+                prevJ = prevI;
+            }
+            prevI = j;
+        }
+        if (min != i) {
+            trocarViaturas(inicio,prevI, i, prevJ, min);
+            if (i == inicio) {
+                inicio = min;
+            }
+        }
+    }
+}
+void trocarViaturas(Viatura*& head, Viatura* prevA, Viatura* a, Viatura* prevB, Viatura* b) {
+    if (prevA != NULL) {
+        prevA->prox = b;
+    } else {
+        head = b;
+    }
+
+    if (prevB != NULL) {
+        prevB->prox = a;
+    } else {
+        head = a;
+    }
+
+    Viatura* temp = a->prox;
+    a->prox = b->prox;
+    b->prox = temp;
+}

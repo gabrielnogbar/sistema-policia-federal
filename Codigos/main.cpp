@@ -19,6 +19,9 @@ int main(){
         strcpy(newViatura->Tipo, tipo);
         printf(" %d %s", newViatura->Codigo, newViatura->Tipo);
         newViatura->prox=NULL;
+        for (int i = 0; i < 4; i++) {
+        newViatura->policiais[i][0] = '\0'; // Atribui o caractere nulo ao primeiro caractere do nome
+    }
         if(strcmp(newViatura->Tipo, "regular")==0){
             newViatura->tipo=0;
         }
@@ -110,8 +113,6 @@ int main(){
     Viatura *copiaViatura = ptrVI;
     int op=10;
     do{
-
-
         distribuidorChamado(ptrVI,iRegular,iEspecializada);
         printf("\n1 - Viatura Login\n");
         printf("2 - Viatura em uso\n");
@@ -157,7 +158,12 @@ int main(){
             printf("Ainda não disponivel");
         }
         else if(op==6){
-            printf("Ainda não disponivel");
+            printf("Nome do Comandante: ");
+            char nome[30],senha[30];
+            scanf(" %s", nome);
+            printf("\nSenha: ");
+            scanf(" %s", senha);
+            Comandante(ptrPoI,senha,nome,pilhaChamadosResolvidos);
         }
 
         // Opçõe para teste
@@ -194,6 +200,7 @@ else if (op==19)
         
 
         ptrVI = copiaViatura;
+        selectionSortViaturas(ptrVI);
     }while(op!=0);
 
     return 0;
