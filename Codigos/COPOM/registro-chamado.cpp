@@ -194,7 +194,7 @@ void distribuidorChamado(Viatura* listaViaturas, chamadoPolicial* &chamadosRegul
         printf("\n**** RADIO ****\n\n");
         // percorrer viaturas
 
-        while (viatura != NULL){
+        while (viatura != NULL &&(chamadosRegular !=NULL || chamadosEspecial !=NULL)){
             
             // Verificadores: para definir se a fila esta vazia ou nao;
             bool regular = true;
@@ -240,7 +240,7 @@ void distribuidorChamado(Viatura* listaViaturas, chamadoPolicial* &chamadosRegul
     }
 } 
 
-void empilharChamadoResolvido(chamadoPolicial* &chamadoResolvido, chamadoPolicial* &pilha){
+void empilharChamadoResolvido(chamadoPolicial*chamadoResolvido, chamadoPolicial* &pilha){
 
     // ->anterior: para ir em direcap ao chamado mais antigo
     // ->prox: para ir em direcao ao chamado mais recente

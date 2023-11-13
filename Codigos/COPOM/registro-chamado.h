@@ -30,5 +30,5 @@
     void distribuidorChamado(Viatura* listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial );
 
     // Empilha o chamado em uma pilha de chamados resolvidos
-    void empilharChamadoResolvido(chamadoPolicial* &chamadoResolvido, chamadoPolicial* &pilha);
+    void empilharChamadoResolvido(chamadoPolicial* chamadoResolvido, chamadoPolicial* &pilha);
 #endif // 
