@@ -1,19 +1,8 @@
-/*
-    Notas Importantes:
-        - Comando para compilar:
-            cd codigos
-            gcc main.cpp COPOM/registro-chamado.cpp Login/viaturaLogin.cpp -o main.exe
-            
-*/
-
-
-
-
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "./COPOM/registro-chamado.h"
+//#include "./Login/viaturaLogin.h"
+#include "COPOM/registro-chamado.h"
 
 int main(){
     int LogadasR=0, LogadasE=0;
@@ -23,25 +12,17 @@ int main(){
     for(int i=0;i<10;i++){
         char tipo[50];
         struct Viatura *newViatura = (struct Viatura *)malloc(sizeof(struct Viatura)); //Criando Viatura
-        newViatura->chamadoAtual=NULL;
-        newViatura->Logado=0;
         fscanf(arquivoviaturas," %d", &newViatura->Codigo);
         fscanf(arquivoviaturas," %[^\n]",tipo);
         strcpy(newViatura->Tipo, tipo);
         printf(" %d %s", newViatura->Codigo, newViatura->Tipo);
         newViatura->prox=NULL;
-        for (int i = 0; i < 4; i++) {
-        newViatura->policiais[i][0] = '\0'; // Atribui o caractere nulo ao primeiro caractere do nome
-    }
-        if(strcmp(newViatura->Tipo, "regular")==0){
+        if(newViatura->Tipo=="regular"){
             newViatura->tipo=0;
         }
         else{
             newViatura->tipo=1;
         }
-        newViatura->disponivel = 0;
-        newViatura->Logado = 0;
-
         if(ptrVA== NULL){
             ptrVA= newViatura;
             ptrVI= newViatura;
@@ -49,7 +30,6 @@ int main(){
         else{
             ptrVA->prox = newViatura;
             ptrVA=newViatura;
-            ptrVA->prox = NULL;
         }       
     }
     fclose(arquivoviaturas);
@@ -66,7 +46,6 @@ int main(){
         fscanf(arquivopolicia," %d", &policia->idade);
         fscanf(arquivopolicia," %[^\n]",policia->cargo);
         fscanf(arquivopolicia," %[^\n]",policia->senha);
-        printf("%s", policia->senha);
         policia->prox=NULL;
         if(ptrPoA==NULL){
             ptrPoA=policia;
@@ -80,19 +59,19 @@ int main(){
     fclose(arquivopolicia);
     
     Pessoa *ptrPeI=NULL, *ptrPeA=NULL;
-    FILE * arquivopessoas;
+    FILE *arquivopessoas;
     arquivopessoas= fopen("../documentos/pessoas.txt","r");
     while(!feof(arquivopessoas)){
         struct Pessoa *novapessoa= (struct Pessoa *)malloc(sizeof(struct Pessoa));
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->nome);
-        fscanf(arquivopessoas," %11s",novapessoa->CPF);
-        //printf("%s\n",novapessoa->CPF);
+        fscanf(arquivopessoas,"  %s",novapessoa->CPF);
+        printf(" %s", novapessoa->CPF);
         fscanf(arquivopessoas,"  %[^\n]",novapessoa->cidade);
         fscanf(arquivopessoas,"  %d",&novapessoa->idade);
         fscanf(arquivopessoas,"  %d",&novapessoa->numeropassagens);
         for (int i=0;i<novapessoa->numeropassagens;i++){
             fscanf(arquivopessoas," %[^\n]",novapessoa->passagens[i]);
-            //printf("%s \n ", novapessoa->passagens[i]);
+            printf("%s \n ", novapessoa->passagens[i]);
         }
         fscanf(arquivopessoas, " %d",&novapessoa->numeroinadimplencias);
         for( int i=0; i<novapessoa->numeroinadimplencias;i++){
@@ -120,11 +99,11 @@ int main(){
 
     chamadoPolicial *prioridade = NULL; // Ponteito que aponta para o final da fila de prioridade
 
-    chamadoPolicial *pilhaChamadosResolvidos = NULL; // pilha com todos os chamados resolvido
-    Viatura *copiaViatura = ptrVI;
+    
     int op=10;
     do{
         distribuidorChamado(ptrVI,iRegular,iEspecializada);
+        
         printf("\n1 - Viatura Login\n");
         printf("2 - Viatura em uso\n");
         printf("3 - COPOM\n");
@@ -134,7 +113,6 @@ int main(){
         printf("0 - Encerrar Programa\n");
         scanf("%d", &op);
 
-       ptrVI = copiaViatura;
         if (op==1){
             int op2=0;
             printf("1 - Policia Regular\n");
@@ -144,13 +122,13 @@ int main(){
             Viatura  *ptrReservaV;
             ptrReservaP= ptrPoI;
             ptrReservaV= ptrVI;
-            LoginViaturas(op2, ptrReservaP, ptrReservaV,iRegular,iEspecializada,LogadasR,LogadasE, ptrPeI,pilhaChamadosResolvidos);
+            LoginViaturas(op2, ptrReservaP, ptrReservaV,iRegular,iEspecializada,LogadasR,LogadasE, ptrPeI);
         }
         else if(op==2){
             printf("Informe o codigo da Viatura:\n ");
             int codigoV;
             scanf(" %d",&codigoV);
-            VerificaUso(codigoV,ptrVI,ptrPeI,pilhaChamadosResolvidos);
+            VerificaUso(codigoV,ptrVI,ptrPeI);
 
         }
         else if(op==3){
@@ -158,60 +136,16 @@ int main(){
             copomRegistroChamado(iRegular, fRegular, prioridade, iEspecializada, fEspecializada);
         }
         else if(op==4){
-            printf("Nome do PM: ");
-            char nome[30],senha[30];
-            scanf(" %s", nome);
-            printf("\nSenha: ");
-            scanf(" %s", senha);
-            //LoginPM(ptrPoI,senha,nome,pilhaChamadosResolvidos);
+            printf("Ainda não disponivel");
         }
         else if(op==5){
             printf("Ainda não disponivel");
         }
         else if(op==6){
-            printf("Nome do Comandante: ");
-            char nome[30],senha[30];
-            scanf(" %s", nome);
-            printf("\nSenha: ");
-            scanf(" %s", senha);
-            //Comandante(ptrPoI,senha,nome,pilhaChamadosResolvidos);
+            printf("Ainda não disponivel");
         }
 
-        // Opçõe para teste
-        else if (op==17)
-        {
-            chamadoPolicial* teste = desenfilerar(iRegular);
-            empilharChamadoResolvido(teste, pilhaChamadosResolvidos);
-         
-        }
-        else if (op==18)
-        {
-            chamadoPolicial* teste = desenfilerar(iEspecializada);
-            empilharChamadoResolvido(teste, pilhaChamadosResolvidos);
-        }
 
-else if (op==19)
-        {
-            imprimirLista(pilhaChamadosResolvidos, "Pilha de chamados resolvidos");
-        }
-        
-        else if (op==20){
-            printf("\n----------------------------------------+\n");
- 
-            printf("\n FILA REGULAR:\n");
-            imprimirLista(iRegular, "fila regular");
-
-
-            printf("\nFILA ESPECIALIZADA:\n");
-            imprimirLista(iEspecializada, "fila especializada");
-            printf("apagar essas impressoes após os testes ^\n");
-            printf("\n----------------------------------------+\n");
-
-        }
-        
-
-        ptrVI = copiaViatura;
-        selectionSortViaturas(ptrVI);
     }while(op!=0);
 
     return 0;

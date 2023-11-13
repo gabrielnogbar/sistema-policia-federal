@@ -2,7 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "resgistro-chamado.h"
+#include "registro-chamado.h"
+
 
 void copiarChamado( chamadoPolicial* &destino, chamadoPolicial *origem)
 {
@@ -25,6 +26,7 @@ void enfilerar(chamadoPolicial *nova, chamadoPolicial *&I, chamadoPolicial *&F){
     else{
         F->anterior = celula;
         celula->prox = F;
+        celula->anterior = NULL;
         F = celula;
     }
 }
@@ -43,6 +45,7 @@ void enfilerarPrioridade(chamadoPolicial* nova, chamadoPolicial* &I, chamadoPoli
     else if(PrioridadeF == NULL){
         PrioridadeF = celula;
         PrioridadeF->anterior = I;
+        PrioridadeF->prox =NULL;
         I->prox = PrioridadeF;
         I = PrioridadeF;
     }
@@ -63,21 +66,24 @@ void enfilerarPrioridade(chamadoPolicial* nova, chamadoPolicial* &I, chamadoPoli
 
 
 // Funcao para desenfilenar os chamados, retorna um ponteiro de chamado
-chamadoPolicial *desenfilerar(chamadoPolicial *&I, chamadoPolicial *&F){
+chamadoPolicial *desenfilerar(chamadoPolicial *&I){
     
     struct chamadoPolicial *aux;
 
     if (I == NULL){
+        printf("\nlog: !!Não há chamados nessa fila!!\n");
         return NULL;
     }
     else{
         aux = I;
-        I = aux->anterior;
-
-        if ( I == NULL){
-            F = NULL;
+        if(I->anterior != NULL){
+            I = I->anterior;
+            I->prox = NULL;
         }
-
+        else{
+            I = NULL;
+        }
+        
         return aux;
     }
 }
@@ -97,16 +103,19 @@ void imprimirLista(chamadoPolicial *I, const char *nomeFila)
 
 
 
-void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular, chamadoPolicial* &prioritario,chamadoPolicial *&iEspecializada , chamadoPolicial *&fEspecializada){
+void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular, chamadoPolicial* &prioritario,chamadoPolicial *&iEspecializada , 
+chamadoPolicial *&fEspecializada){
 
     int tipo;
     struct chamadoPolicial *novo = (struct chamadoPolicial *)calloc(1, sizeof(chamadoPolicial));
-    printf("          SPM - COPOM\n\n");
-
+    printf("\n          SPM - COPOM\n\n");
+    printf("Resgistrar chamado: \n");
     printf("Policia Normal - 1   Especializada - 2: \n");
     do{
     scanf("%d", &tipo);
-    }while (tipo != 1 && tipo != 2);
+    }while (tipo != 1 && tipo != 2){
+        printf("\nEntrada inválida!!\nTente novamente\n")
+    };
     
     
     printf("Viaturas Necessárias: \n");
@@ -158,4 +167,99 @@ void copomRegistroChamado(chamadoPolicial *&iRegular, chamadoPolicial *&fRegular
     free(novo);
 }   
 
+
+void distribuidorChamado(Viatura* listaViaturas, chamadoPolicial* &chamadosRegular, chamadoPolicial* &chamadosEspecial ){
+
+    /*
+        Prototipo
+
+        -percorre pelas viaturas bucando um chamado para ela;
+
+        NOTA: Esta funcao ainda nao se preocupa com o numero de viaturas
+              necessarias para o chamado. 
+    */
+   
+   // ponteiro para percorrer as listas
+   Viatura* viatura = listaViaturas;
+
+    
+    // Verificar se as filas de chamados estao vazios
+    if(chamadosRegular == NULL && chamadosEspecial == NULL){
+        
+        printf("\n**** RADIO ****\n\n");
+        // TODO: Revisar se deixa ou tira esse print
+        printf("\n--- Não há nenhum chamado ---\n***************\n");
+        
+    }
+    else{
+
+        printf("\n**** RADIO ****\n\n");
+        // percorrer viaturas
+
+        while (viatura != NULL &&(chamadosRegular !=NULL || chamadosEspecial !=NULL)){
+            
+            // Verificadores: para definir se a fila esta vazia ou nao;
+            bool regular = true;
+            bool especial = true;
+
+            if (chamadosRegular == NULL){
+                regular = false;
+            }
+            if (chamadosEspecial == NULL){
+                especial = false;
+            }
+            printf("\ncod: %d, disponivel: %d, logado: %d \n", viatura->Codigo,viatura->disponivel, viatura->Logado);
+            
+            if (viatura->disponivel == 0 && viatura->Logado==1 && viatura->chamadoAtual == NULL){
+                
+                printf("\n entrou em A\n");
+                printf("\ntipo: %d; disponivel: %d; logado: %d  \n", viatura->tipo, viatura->disponivel, viatura->Logado);
+                if (regular){
+                    printf("True");
+                }
+                else{
+                    printf("False");
+                }
+                if (viatura->tipo == 0 && regular){ // se for tipo regular e haver chamados regular
+                    printf("\n entrou em B\n");
+                    chamadoPolicial *chamadoParaAtribuir = desenfilerar(chamadosRegular);
+                    viatura->chamadoAtual = chamadoParaAtribuir;
+                    viatura->disponivel = 1;
+                    chamadoParaAtribuir->viaturaDoChamada = viatura;
+
+                    printf("Viatura %d regular recebeu um chamado %s\n", viatura->Codigo, viatura->chamadoAtual->descricao);
+                }
+                else if (viatura->tipo ==  1 && especial){ // se for tipo especial e haver chamados especias
+                    viatura->chamadoAtual = desenfilerar(chamadosEspecial);
+                    viatura->disponivel = 1;
+                    printf("Viatura %d especializada recebeu um chamado: %s\n", viatura->Codigo, viatura->chamadoAtual->descricao);
+                } 
+            }
+
+            viatura = viatura->prox;
+        }
+
+        printf("\n***************\n");
+    }
+} 
+
+void empilharChamadoResolvido(chamadoPolicial*chamadoResolvido, chamadoPolicial* &pilha){
+
+    // ->anterior: para ir em direcap ao chamado mais antigo
+    // ->prox: para ir em direcao ao chamado mais recente
+    if(chamadoResolvido != NULL){
+        if (pilha == NULL){
+            chamadoResolvido->anterior = NULL;
+            chamadoResolvido->prox = NULL;
+            pilha = chamadoResolvido;
+        }
+        else{
+            chamadoResolvido->anterior = pilha;
+            chamadoResolvido->prox = NULL;
+            pilha->prox = chamadoResolvido;
+            pilha = chamadoResolvido;
+        }
+    }
+    
+}
 
