@@ -67,7 +67,7 @@
 
     void Caso(Viatura* &ptrV,Pessoa *ptrP,chamadoPolicial* &pilhaChamadosResolvidos);
     
-    char* decodificadorSenha(char* senha);
+    char* codificadorSenha(char* senha);
 
     bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI);
 

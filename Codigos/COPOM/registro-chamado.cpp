@@ -108,12 +108,14 @@ chamadoPolicial *&fEspecializada){
 
     int tipo;
     struct chamadoPolicial *novo = (struct chamadoPolicial *)calloc(1, sizeof(chamadoPolicial));
-    printf("          SPM - COPOM\n\n");
-
+    printf("\n          SPM - COPOM\n\n");
+    printf("Resgistrar chamado: \n");
     printf("Policia Normal - 1   Especializada - 2: \n");
     do{
     scanf("%d", &tipo);
-    }while (tipo != 1 && tipo != 2);
+    }while (tipo != 1 && tipo != 2){
+        printf("\nEntrada inválida!!\nTente novamente\n")
+    };
     
     
     printf("Viaturas Necessárias: \n");
@@ -236,7 +238,8 @@ void distribuidorChamado(Viatura* listaViaturas, chamadoPolicial* &chamadosRegul
 
             viatura = viatura->prox;
         }
-        
+
+        printf("\n***************\n");
     }
 } 
 
@@ -256,8 +259,6 @@ void empilharChamadoResolvido(chamadoPolicial*chamadoResolvido, chamadoPolicial*
             pilha->prox = chamadoResolvido;
             pilha = chamadoResolvido;
         }
-        printf("Pilhas: \n");
-        imprimirLista(pilha, "Pilha de chamados resolvidos: \n");
     }
     
 }

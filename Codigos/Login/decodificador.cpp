@@ -1,3 +1,5 @@
+/*
+
 #include<stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -50,16 +52,16 @@ while (auxiliar[iFinal] != '\0'){
     //strcpy(senha, senhaDescrip);
     return senhaDescrip;
 }
-
+*/
 /*
 int main(){
     char senha[30];
     scanf(" %s", senha);
 
-    char* senhaDecodificada = decodificadorSenha(senha);
+    char* senhaCodificada = codificadorSenha(senha);
     printf("%s\n",senhaDecodificada);
 
-    free(senhaDecodificada);
+    free(senhaCodificada);
     return 0;
 }
 */
@@ -69,14 +71,14 @@ int main(){
     Entrada: Ponteiro para a fila de infomações dos policias / nome / 
     Saida: true se as credenciais estarem corretas e falso caso contrario;
 */
-
+/*
 bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI){
 
     char* senhacodificada = codificadorSenha(senha);
     //printf(senhaDecodificada);
 
     while(ptrPoI != NULL){
-
+codificadorSenha
         if (strcmp(ptrPoI->nomeGuerra, usuario)==0){
             if (strcmp(ptrPoI->senha, senhacodificada)==0){
                 return true;
@@ -89,3 +91,4 @@ bool validarUsuario(char* usuario, char* senha, Policial *ptrPoI){
     }
     return false;
 }
+*/
