@@ -117,7 +117,7 @@ void Caso(Viatura* &ptrV,Pessoa *ptrP,chamadoPolicial* &pilhaChamadosResolvidos)
 
 void funcoesChamada(Pessoa *ptrP){
     int op=0;
-    do{
+    while(true){
     printf("1 - Pesquisar por CPF\n");
     printf("2 - Solicitar Reforço\n");
     printf("3 - Prisão em Andamento \n");
@@ -135,13 +135,12 @@ void funcoesChamada(Pessoa *ptrP){
     }
     else if(op==4){
         printf("\nChamado encerrado!\n");
+        break;
     }
-
+    }
+}
 
     
-
-}while(op!=4);
-}
 
 void PesquisarCPF(Pessoa *ptrP){
     char cpf[15];
